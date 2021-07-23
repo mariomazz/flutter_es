@@ -159,7 +159,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget buildListPersons() {
     if (_persons[widget.filterList] != null) {
       return ListView.builder(
-        itemCount: _persons[widget.filterList].length,
+        itemCount: _persons[widget.filterList].length as int,
         itemBuilder: (context, index) {
           return CardPerson(
             person: Person(
@@ -211,7 +211,7 @@ class _MainScreenState extends State<MainScreen> {
     }
   }
 
-  visualizationTitleListPersons() {
+  Widget visualizationTitleListPersons() {
     if (_persons[widget.filterList] != null) {
       return SliverPersistentHeader(
         pinned: true,

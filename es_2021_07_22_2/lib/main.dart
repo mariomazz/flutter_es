@@ -2,6 +2,7 @@ import 'package:es_2021071916/config/routes/route-generator.dart';
 import 'package:es_2021071916/screens/main-screen.dart';
 import 'package:es_2021071916/widgets/my-app-bar.dart';
 import 'package:flutter/material.dart';
+import 'package:lint/lint.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,12 +23,12 @@ class MyApp extends StatelessWidget {
 //refresh app
 
 class AppBuilder extends StatefulWidget {
-  final Function(BuildContext) builder;
+  final Widget Function(BuildContext) builder;
 
   const AppBuilder({Key? key, required this.builder}) : super(key: key);
 
   @override
-  AppBuilderState createState() => new AppBuilderState();
+  AppBuilderState createState() => AppBuilderState();
 
   static AppBuilderState? of(BuildContext context) {
     return context.findAncestorStateOfType<AppBuilderState>();
