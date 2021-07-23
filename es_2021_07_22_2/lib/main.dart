@@ -2,7 +2,6 @@ import 'package:es_2021071916/config/routes/route-generator.dart';
 import 'package:es_2021071916/screens/main-screen.dart';
 import 'package:es_2021071916/widgets/my-app-bar.dart';
 import 'package:flutter/material.dart';
-import 'package:lint/lint.dart';
 
 void main() => runApp(MyApp());
 
