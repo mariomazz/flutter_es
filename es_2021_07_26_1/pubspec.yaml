@@ -36,7 +36,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   sizer: ^2.0.13
   lint: ^1.5.3
-  auto_size_text: ^2.1.0
 
 dev_dependencies:
   flutter_test:
