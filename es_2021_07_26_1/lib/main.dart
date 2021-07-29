@@ -29,13 +29,27 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: LayoutBuilder(builder: (context, constraints) {
-        if (constraints.maxWidth > 600) {
+        print(constraints.maxWidth);
+        if (constraints.maxWidth < 600) {
           return Container(
             color: Colors.blueAccent,
+            child: Text(
+              'cellulare',
+            ),
+          );
+        } else if (constraints.maxWidth >= 600 &&
+            constraints.maxWidth <= 1000) {
+          return Container(
+            color: Colors.amberAccent,
+            child: Text(''),
+          );
+        } else if (constraints.maxWidth > 1000) {
+          return Container(
+            color: Colors.blueGrey,
           );
         } else {
           return Container(
-            color: Colors.amberAccent,
+            color: Colors.black,
           );
         }
       }),
