@@ -1,4 +1,4 @@
-import 'package:es_2021071916/screens/main-screen.dart';
+import 'package:es_2021071916/screens/main_screen.dart';
 import 'package:es_2021071916/screens/search-persons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';

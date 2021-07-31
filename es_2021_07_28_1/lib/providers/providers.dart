@@ -10,4 +10,9 @@ class Counter with ChangeNotifier {
     num += 1;
     notifyListeners();
   }
+
+  void resetCounter() {
+    num = 0;
+    notifyListeners();
+  }
 }
