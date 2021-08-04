@@ -1,5 +1,5 @@
-import 'package:es_2021_08_3_1/models/report.dart';
-import 'package:es_2021_08_3_1/models/report_shots.dart';
+//import 'package:es_2021_08_3_1/models/report.dart';
+//import 'package:es_2021_08_3_1/models/report_shots.dart';
 import 'package:es_2021_08_3_1/services/services.dart';
 import 'package:flutter/material.dart';
 
@@ -40,19 +40,21 @@ class _MyHomePageState extends State<MyHomePage> {
       body: FutureBuilder<List>(
         future: ServicesReports.readJsonFileReports(),
         builder: (context, snapshot) {
-          print(snapshot.data![0].damageLocation["location"]);
+          List<dynamic> mySnapshot = snapshot.data ?? [];
 
           if (snapshot.connectionState == ConnectionState.done) {
-            final List reports = snapshot.data ?? [];
-
+            final List reports = mySnapshot;
+            print(reports[0].damageLocation["location"]["latitude"]);
             return ListView.builder(
-                itemCount: reports.length,
-                itemBuilder: (context, index) => ListTile(
-                      leading: const Icon(Icons.access_alarms),
-                      title: Text(reports[index].description.toString()),
-                      subtitle:
-                          Text(reports[index].creationDateTimeUTC.toString()),
-                    ));
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: const Icon(Icons.access_alarms),
+                  title: Text(reports[index].description.toString()),
+                  subtitle: Text(reports[index].creationDateTimeUTC.toString()),
+                );
+              },
+              itemCount: reports.length,
+            );
           } else {
             return const Center(
               child: CircularProgressIndicator(),
