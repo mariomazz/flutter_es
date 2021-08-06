@@ -163,12 +163,11 @@ class _MainScreenState extends State<MainScreen> {
         itemBuilder: (context, index) {
           return CardPerson(
             person: Person(
-              name: _persons[widget.filterList][index]['name'] ?? 'undefined',
-              surname:
-                  _persons[widget.filterList][index]['surname'] ?? 'undefined',
+              name: _persons[widget.filterList][index]['name'].toString(),
+              surname: _persons[widget.filterList][index]['surname'].toString(),
               imageProfileUrl: _persons[widget.filterList][index]
-                      ['profile-image-url'] ??
-                  'https://static.thenounproject.com/png/504708-200.png',
+                      ['profile-image-url']
+                  .toString(),
             ),
           );
         },

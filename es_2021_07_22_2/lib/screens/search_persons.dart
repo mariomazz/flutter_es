@@ -20,7 +20,7 @@ class _ScreenSearchPersonsState extends State<ScreenSearchPersons> {
         ),
         body: Center(
           child: widget.filterList == null
-              ? Text(
+              ? const Text(
                   'search persons',
                   style: TextStyle(
                     color: Colors.black,
@@ -31,7 +31,7 @@ class _ScreenSearchPersonsState extends State<ScreenSearchPersons> {
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
+                    const Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'search persons filter : ',
