@@ -1,11 +1,7 @@
-//import 'package:es_2021_08_3_1/models/report.dart';
-//import 'package:es_2021_08_3_1/models/report_shots.dart';
-import 'package:es_2021_08_3_1/services/services.dart';
+import 'package:es_2021_08_3_1/services/service_reports.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
@@ -38,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('prova'),
       ),
       body: FutureBuilder<List>(
-        future: ServicesReports.httpRequestReports(),
+        future: ServiceReports.readJsonFileReports(),
         builder: (context, snapshot) {
           List<dynamic> mySnapshot = snapshot.data ?? [];
 
