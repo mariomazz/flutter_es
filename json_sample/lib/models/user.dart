@@ -1,8 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:json_sample/models/address_factory.dart';
-import 'package:json_sample/models/company_factory.dart';
+import 'package:json_sample/models/address.dart';
+import 'package:json_sample/models/company.dart';
 
-part 'user_factory.g.dart';
+part 'user.g.dart';
 
 @JsonSerializable()
 class User {
@@ -21,6 +21,7 @@ class User {
   Address address;
 
   String phone;
+
   String website;
 
   Company company;

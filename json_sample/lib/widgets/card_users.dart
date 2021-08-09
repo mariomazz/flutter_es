@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:json_sample/models/user_factory.dart';
+import 'package:json_sample/models/user.dart';
 
 class CardUsers extends StatelessWidget {
   final User user;
@@ -21,9 +21,11 @@ class CardUsers extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.all(10),
                 child: Text(
-                  'User',
+                  'USER',
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: titleTextSize),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                  ),
                 ),
               ),
               Text(
@@ -123,11 +125,17 @@ class CardUsers extends StatelessWidget {
               ),
               Text(
                 'PHONE : ${user.phone}',
-                style: TextStyle(fontSize: textSize),
+                style: TextStyle(
+                  fontSize: textSize,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Text(
                 'WEBSITE : ${user.website}',
-                style: TextStyle(fontSize: textSize),
+                style: TextStyle(
+                  fontSize: textSize,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

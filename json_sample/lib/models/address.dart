@@ -1,7 +1,7 @@
-import 'package:json_sample/models/geo_factory.dart';
+import 'package:json_sample/models/geo.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'address_factory.g.dart';
+part 'address.g.dart';
 
 @JsonSerializable()
 class Address {

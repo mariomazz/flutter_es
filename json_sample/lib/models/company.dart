@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'company_factory.g.dart';
+part 'company.g.dart';
 
 @JsonSerializable()
 class Company {

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'geo_factory.dart';
+part of 'geo.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

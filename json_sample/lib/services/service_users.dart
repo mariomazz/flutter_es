@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:json_sample/models/user_factory.dart';
+import 'package:json_sample/models/user.dart';
 
 class ServiceUsers {
   static Future<List<User>> getUsers() async {

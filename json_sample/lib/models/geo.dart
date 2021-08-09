@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'geo_factory.g.dart';
+part 'geo.g.dart';
 
 @JsonSerializable()
 class Geo {
