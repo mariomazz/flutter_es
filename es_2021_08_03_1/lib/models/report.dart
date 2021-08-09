@@ -1,3 +1,5 @@
+//json serializable generator
+
 class Report {
   String? description;
   String? creationDateTimeUTC;
@@ -17,7 +19,11 @@ class Report {
     final creationDateTimeUTC = json["creationDateTimeUTC"] as String;
     final damageType = json["damageType"] as String;
     final damageLocation = json["damageLocation"] as Map;
-    final attachmentsIds = json["attachmentsIds"] as List;
+
+    // final attachmentsIds = json["attachmentsIds"] as List;
+
+    final attachmentsIds = List<String>.from(json["attachmentsIds"]);
+
     return Report(
       description: description,
       creationDateTimeUTC: creationDateTimeUTC,
