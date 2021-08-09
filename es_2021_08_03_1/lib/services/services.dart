@@ -69,7 +69,7 @@ class ServicesReports {
   static Future<List> httpRequestReports() async {
     // crezione url per la richiesta http
 
-    var url = Uri.parse("http://localhost:80/reports");
+    var url = Uri.parse("http://localhost:3000/reports");
 
     // richiesta get con il metodo http , risultato => 'Stringa' , lo immetto nella variabile response
 
@@ -80,12 +80,12 @@ class ServicesReports {
     if (response.statusCode == 200) {
       // json.decode => fa la decodifica della stringa ricevuta in precedenza dal server => ora abbiamo una lista creata da un file json
 
-      final List<dynamic> _reportsShort = json.decode(response.body);
+      final _reports = json.decode(response.body);
 
       // scorro tutti gli elementi della lista creata dal file json, iniettandola nella mia lista di Reports
 
-      final List reports = _reportsShort
-          .map((reportJson) => ReportShort.fromJson(reportJson))
+      final reports = _reports
+          .map((report) => Report.fromJson(report))
           .toList();
 
       // alla fine quando è tutto mappato la ritorno al mio future builder per la visualizzazione della lista

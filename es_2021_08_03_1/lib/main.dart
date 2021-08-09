@@ -38,13 +38,12 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('prova'),
       ),
       body: FutureBuilder<List>(
-        future: ServicesReports.readJsonFileReports(),
+        future: ServicesReports.httpRequestReports(),
         builder: (context, snapshot) {
           List<dynamic> mySnapshot = snapshot.data ?? [];
 
           if (snapshot.connectionState == ConnectionState.done) {
             final List reports = mySnapshot;
-            print(reports[0].damageLocation["location"]["latitude"]);
             return ListView.builder(
               itemBuilder: (context, index) {
                 return ListTile(

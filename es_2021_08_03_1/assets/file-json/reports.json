@@ -1,43 +1,5 @@
-  [
-    {
-        "description": "Attività di rimozione del vandalismo grafico e di ripristino del colore delle superfici murarie ",
-        "creationDateTimeUTC": "orario",
-        "damageType": "",
-        "damageLocation": {
-          "location": {
-            "fullAddress": "fullAddress",
-            "latitude": 0,
-            "longitude": 0,
-            "address": "Gruppo commercianti Via S.Vitale",
-            "zipCode": "zipCode",
-            "city": "city",
-            "country": "country"
-          }
-        },
-        "attachmentsIds": [
-          "https://i.ibb.co/cgJpXGs/DS71919.jpg",
-          "https://i.ibb.co/cgJpXGs/DS71919.jpg"
-        ]
-    },{
-      "description": "Attività di rimozione del vandalismo grafico e di ripristino del colore delle superfici murarie ",
-      "creationDateTimeUTC": "orario",
-      "damageType": "",
-      "damageLocation": {
-        "location": {
-          "fullAddress": "fullAddress",
-          "latitude": 0,
-          "longitude": 0,
-          "address": "Gruppo commercianti Via S.Vitale",
-          "zipCode": "zipCode",
-          "city": "city",
-          "country": "country"
-        }
-      },
-      "attachmentsIds": [
-        "https://i.ibb.co/cgJpXGs/DS71919.jpg",
-        "https://i.ibb.co/cgJpXGs/DS71919.jpg"
-      ]
-  },{
+[
+  {
     "description": "Attività di rimozione del vandalismo grafico e di ripristino del colore delle superfici murarie ",
     "creationDateTimeUTC": "orario",
     "damageType": "",
@@ -56,26 +18,145 @@
       "https://i.ibb.co/cgJpXGs/DS71919.jpg",
       "https://i.ibb.co/cgJpXGs/DS71919.jpg"
     ]
-},
-{
-  "description": "Attività di rimozione del vandalismo grafico e di ripristino del colore delle superfici murarie ",
-  "creationDateTimeUTC": "orario",
-  "damageType": "",
-  "damageLocation": {
-    "location": {
-      "fullAddress": "fullAddress",
-      "latitude": 0,
-      "longitude": 0,
-      "address": "Gruppo commercianti Via S.Vitale",
-      "zipCode": "zipCode",
-      "city": "city",
-      "country": "country"
-    }
   },
-  "attachmentsIds": [
-    "https://i.ibb.co/cgJpXGs/DS71919.jpg",
-    "https://i.ibb.co/cgJpXGs/DS71919.jpg"
-  ]
-}
-  ]
-
+  {
+    "description": "Attività di rimozione del vandalismo grafico e di ripristino del colore delle superfici murarie ",
+    "creationDateTimeUTC": "orario",
+    "damageType": "",
+    "damageLocation": {
+      "location": {
+        "fullAddress": "fullAddress",
+        "latitude": 0,
+        "longitude": 0,
+        "address": "Gruppo commercianti Via S.Vitale",
+        "zipCode": "zipCode",
+        "city": "city",
+        "country": "country"
+      }
+    },
+    "attachmentsIds": [
+      "https://i.ibb.co/cgJpXGs/DS71919.jpg",
+      "https://i.ibb.co/cgJpXGs/DS71919.jpg"
+    ]
+  },
+  {
+    "description": "Attività di rimozione del vandalismo grafico e di ripristino del colore delle superfici murarie ",
+    "creationDateTimeUTC": "orario",
+    "damageType": "",
+    "damageLocation": {
+      "location": {
+        "fullAddress": "fullAddress",
+        "latitude": 0,
+        "longitude": 0,
+        "address": "Gruppo commercianti Via S.Vitale",
+        "zipCode": "zipCode",
+        "city": "city",
+        "country": "country"
+      }
+    },
+    "attachmentsIds": [
+      "https://i.ibb.co/cgJpXGs/DS71919.jpg",
+      "https://i.ibb.co/cgJpXGs/DS71919.jpg"
+    ]
+  },
+  {
+    "description": "Attività di rimozione del vandalismo grafico e di ripristino del colore delle superfici murarie ",
+    "creationDateTimeUTC": "orario",
+    "damageType": "",
+    "damageLocation": {
+      "location": {
+        "fullAddress": "fullAddress",
+        "latitude": 0,
+        "longitude": 0,
+        "address": "Gruppo commercianti Via S.Vitale",
+        "zipCode": "zipCode",
+        "city": "city",
+        "country": "country"
+      }
+    },
+    "attachmentsIds": [
+      "https://i.ibb.co/cgJpXGs/DS71919.jpg",
+      "https://i.ibb.co/cgJpXGs/DS71919.jpg"
+    ]
+  },
+  {
+    "description": "Attività di rimozione del vandalismo grafico e di ripristino del colore delle superfici murarie ",
+    "creationDateTimeUTC": "orario",
+    "damageType": "",
+    "damageLocation": {
+      "location": {
+        "fullAddress": "fullAddress",
+        "latitude": 0,
+        "longitude": 0,
+        "address": "Gruppo commercianti Via S.Vitale",
+        "zipCode": "zipCode",
+        "city": "city",
+        "country": "country"
+      }
+    },
+    "attachmentsIds": [
+      "https://i.ibb.co/cgJpXGs/DS71919.jpg",
+      "https://i.ibb.co/cgJpXGs/DS71919.jpg"
+    ]
+  },
+  {
+    "description": "Attività di rimozione del vandalismo grafico e di ripristino del colore delle superfici murarie ",
+    "creationDateTimeUTC": "orario",
+    "damageType": "",
+    "damageLocation": {
+      "location": {
+        "fullAddress": "fullAddress",
+        "latitude": 0,
+        "longitude": 0,
+        "address": "Gruppo commercianti Via S.Vitale",
+        "zipCode": "zipCode",
+        "city": "city",
+        "country": "country"
+      }
+    },
+    "attachmentsIds": [
+      "https://i.ibb.co/cgJpXGs/DS71919.jpg",
+      "https://i.ibb.co/cgJpXGs/DS71919.jpg"
+    ]
+  },
+  {
+    "description": "Attività di rimozione del vandalismo grafico e di ripristino del colore delle superfici murarie ",
+    "creationDateTimeUTC": "orario",
+    "damageType": "",
+    "damageLocation": {
+      "location": {
+        "fullAddress": "fullAddress",
+        "latitude": 0,
+        "longitude": 0,
+        "address": "Gruppo commercianti Via S.Vitale",
+        "zipCode": "zipCode",
+        "city": "city",
+        "country": "country"
+      }
+    },
+    "attachmentsIds": [
+      "https://i.ibb.co/cgJpXGs/DS71919.jpg",
+      "https://i.ibb.co/cgJpXGs/DS71919.jpg"
+    ]
+  },
+  {
+    "description": "Attività di rimozione del vandalismo grafico e di ripristino del colore delle superfici murarie ",
+    "creationDateTimeUTC": "orario",
+    "damageType": "",
+    "damageLocation": {
+      "location": {
+        "fullAddress": "fullAddress",
+        "latitude": 0,
+        "longitude": 0,
+        "address": "Gruppo commercianti Via S.Vitale",
+        "zipCode": "zipCode",
+        "city": "city",
+        "country": "country"
+      }
+    },
+    "attachmentsIds": [
+      "https://i.ibb.co/cgJpXGs/DS71919.jpg",
+      "https://i.ibb.co/cgJpXGs/DS71919.jpg"
+    ]
+  }
+]
