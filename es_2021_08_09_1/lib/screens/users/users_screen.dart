@@ -18,12 +18,11 @@ class UsersScreen extends StatelessWidget {
       body: FutureBuilder<Response>(
         future: Provider.of<ServiceUsers>(context).getUsers(),
         builder: (context, snapshot) {
-          final String dataJson = snapshot.data!.bodyString;
-          final List _users = json.decode(dataJson);
-          final List<User> users =
-              _users.map((user) => User.fromJson(user)).toList();
-
           if (snapshot.connectionState == ConnectionState.done) {
+            final String dataJson = snapshot.data!.bodyString;
+            final List _users = json.decode(dataJson);
+            final List<User> users =
+                _users.map((user) => User.fromJson(user)).toList();
             return ListView.separated(
                 separatorBuilder: (context, index) => Container(
                       height: 50,

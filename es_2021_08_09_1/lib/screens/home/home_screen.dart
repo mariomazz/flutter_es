@@ -16,11 +16,6 @@ class HomeScreen extends StatelessWidget {
         children: [
           Container(
             child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          ),
-          Container(
-            child: Center(
               child: Text(
                 'home page',
                 style: TextStyle(
