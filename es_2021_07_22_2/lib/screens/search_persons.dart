@@ -1,4 +1,4 @@
-import 'package:es_2021071916/widgets/my-app-bar.dart';
+import 'package:es_2021071916/widgets/my_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class ScreenSearchPersons extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:es_2021_08_09_1/models/user.dart';
+import 'package:es_2021_08_09_1/models/users/user.dart';
 import 'package:flutter/material.dart';
 
 class CardUsers extends StatelessWidget {

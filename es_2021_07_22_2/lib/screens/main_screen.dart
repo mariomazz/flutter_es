@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:es_2021071916/models/person.dart';
-import 'package:es_2021071916/widgets/card-person.dart';
-import 'package:es_2021071916/widgets/my-app-bar.dart';
+import 'package:es_2021071916/widgets/card_person.dart';
+import 'package:es_2021071916/widgets/my_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;

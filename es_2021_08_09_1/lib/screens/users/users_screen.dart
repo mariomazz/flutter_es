@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:chopper/chopper.dart';
-import 'package:es_2021_08_09_1/services/service_users.dart';
-import 'package:es_2021_08_09_1/models/user.dart';
-import 'package:es_2021_08_09_1/widgets/card_users.dart';
+import 'package:es_2021_08_09_1/services/users/service_users.dart';
+import 'package:es_2021_08_09_1/models/users/user.dart';
+import 'package:es_2021_08_09_1/widgets/users/card_users.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,13 +13,13 @@ class UsersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('app bar'),
+        title: Text('users'),
       ),
       body: FutureBuilder<Response>(
         future: Provider.of<ServiceUsers>(context).getUsers(),
         builder: (context, snapshot) {
-          final String dataJsonUsers = snapshot.data!.bodyString;
-          final List _users = json.decode(dataJsonUsers);
+          final String dataJson = snapshot.data!.bodyString;
+          final List _users = json.decode(dataJson);
           final List<User> users =
               _users.map((user) => User.fromJson(user)).toList();
 
@@ -30,10 +30,8 @@ class UsersScreen extends StatelessWidget {
                     ),
                 itemCount: users.length,
                 itemBuilder: (context, i) {
-                  return Container(
-                    child: CardUsers(
-                      user: users[i],
-                    ),
+                  return CardUsers(
+                    user: users[i],
                   );
                 });
           } else {

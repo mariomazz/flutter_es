@@ -1,6 +1,6 @@
-import 'package:es_2021071916/config/routes/route-generator.dart';
+import 'package:es_2021071916/config/routes/route_generator.dart';
 import 'package:es_2021071916/screens/main_screen.dart';
-import 'package:es_2021071916/widgets/my-app-bar.dart';
+import 'package:es_2021071916/widgets/my_app_bar.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
