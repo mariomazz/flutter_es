@@ -1,6 +1,6 @@
-import 'package:es_2021_08_09_1/screens/home/home_screen.dart';
-import 'package:es_2021_08_09_1/screens/posts/posts_screen.dart';
-import 'package:es_2021_08_09_1/screens/users/users_screen.dart';
+import 'package:myapp/screens/home/home_screen.dart';
+import 'package:myapp/screens/posts/posts_screen.dart';
+import 'package:myapp/screens/users/users_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

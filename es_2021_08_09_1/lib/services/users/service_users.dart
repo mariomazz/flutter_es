@@ -1,5 +1,4 @@
 import 'package:chopper/chopper.dart';
-import 'package:es_2021_08_09_1/models/users/user.dart';
 
 part 'service_users.chopper.dart';
 
@@ -19,5 +18,3 @@ abstract class ServiceUsers extends ChopperService {
     return _$ServiceUsers(client);
   }
 }
-
-

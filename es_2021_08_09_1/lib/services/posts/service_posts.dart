@@ -1,6 +1,4 @@
 import 'package:chopper/chopper.dart';
-import 'package:es_2021_08_09_1/models/posts/post.dart' as post;
-
 part 'service_posts.chopper.dart';
 
 @ChopperApi(baseUrl: '/posts')

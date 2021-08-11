@@ -1,4 +1,4 @@
-import 'package:es_2021_08_09_1/models/users/geo.dart';
+import 'package:myapp/models/users/geo.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'address.g.dart';

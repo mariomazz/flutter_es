@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:chopper/chopper.dart';
-import 'package:es_2021_08_09_1/services/users/service_users.dart';
-import 'package:es_2021_08_09_1/models/users/user.dart';
-import 'package:es_2021_08_09_1/widgets/users/card_users.dart';
+import 'package:myapp/services/users/service_users.dart';
+import 'package:myapp/models/users/user.dart';
+import 'package:myapp/widgets/users/card_users.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

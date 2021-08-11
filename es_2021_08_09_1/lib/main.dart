@@ -1,6 +1,6 @@
-import 'package:es_2021_08_09_1/config/routes/route_generator.dart';
-import 'package:es_2021_08_09_1/services/posts/service_posts.dart';
-import 'package:es_2021_08_09_1/services/users/service_users.dart';
+import 'package:myapp/config/routes/route_generator.dart';
+import 'package:myapp/services/posts/service_posts.dart';
+import 'package:myapp/services/users/service_users.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

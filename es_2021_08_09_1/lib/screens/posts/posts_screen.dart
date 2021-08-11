@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:chopper/chopper.dart';
-import 'package:es_2021_08_09_1/models/posts/post.dart' as post;
-import 'package:es_2021_08_09_1/services/posts/service_posts.dart';
-import 'package:es_2021_08_09_1/widgets/posts/card_posts.dart';
+import 'package:myapp/models/posts/post.dart' as post;
+import 'package:myapp/services/posts/service_posts.dart';
+import 'package:myapp/widgets/posts/card_posts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

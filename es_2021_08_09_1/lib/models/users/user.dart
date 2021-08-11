@@ -1,7 +1,6 @@
-import 'package:es_2021_08_09_1/models/users/address.dart';
-import 'package:es_2021_08_09_1/models/users/company.dart';
+import 'package:myapp/models/users/address.dart';
+import 'package:myapp/models/users/company.dart';
 import 'package:json_annotation/json_annotation.dart';
-
 
 part 'user.g.dart';
 
