@@ -29,8 +29,33 @@ class RouteGenerator {
   static Route<dynamic> _errorRoute() {
     return CupertinoPageRoute(builder: (_) {
       return Scaffold(
+        appBar: AppBar(
+          title: Text('page not found'),
+        ),
         body: Center(
-          child: Text('Error...'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Error... ',
+                  style: TextStyle(
+                    fontSize: 25,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'page not found',
+                  style: TextStyle(
+                    fontSize: 25,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       );
     });
