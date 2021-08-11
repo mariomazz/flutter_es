@@ -1,42 +1,58 @@
 import 'dart:convert';
 import 'package:chopper/chopper.dart';
-import 'package:es_2021_08_09_1/models/posts/post.dart';
+import 'package:es_2021_08_09_1/models/posts/post.dart' as post;
 import 'package:es_2021_08_09_1/services/posts/service_posts.dart';
 import 'package:es_2021_08_09_1/widgets/posts/card_posts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PostsScreen extends StatelessWidget {
-  const PostsScreen({Key? key}) : super(key: key);
+  PostsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('posts'),
-      ),
-      body: FutureBuilder<Response>(
-        future: Provider.of<ServicePosts>(context).getPosts(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            final String dataJson = snapshot.data!.bodyString;
-            final List _posts = json.decode(dataJson);
-            final List<Post_> posts =
-                _posts.map((post) => Post_.fromJson(post)).toList();
-            return ListView.separated(
-                separatorBuilder: (context, index) => Container(
-                      height: 50,
-                    ),
-                itemCount: posts.length,
-                itemBuilder: (context, i) {
-                  return CardPosts(post: posts[i]);
-                });
-          } else {
-            return Center(
+    return FutureBuilder<Response>(
+      future: Provider.of<ServicePosts>(context).getPosts(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          final String dataJson = snapshot.data!.bodyString;
+          final List _posts = json.decode(dataJson);
+          final List<post.Post> posts =
+              _posts.map((element) => post.Post.fromJson(element)).toList();
+          return Scaffold(
+            body: CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  title: Text('posts'),
+                  floating: true,
+                ),
+                buildPosts(posts),
+              ],
+            ),
+          );
+        } else {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('caricamento'),
+            ),
+            body: Center(
               child: CircularProgressIndicator(),
-            );
-          }
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  Widget buildPosts(List<post.Post> posts) {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int i) {
+          return CardPosts(
+            post: posts[i],
+          );
         },
+        childCount: posts.length,
       ),
     );
   }

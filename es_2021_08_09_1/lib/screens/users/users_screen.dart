@@ -11,34 +11,48 @@ class UsersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('users'),
-      ),
-      body: FutureBuilder<Response>(
-        future: Provider.of<ServiceUsers>(context).getUsers(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            final String dataJson = snapshot.data!.bodyString;
-            final List _users = json.decode(dataJson);
-            final List<User> users =
-                _users.map((user) => User.fromJson(user)).toList();
-            return ListView.separated(
-                separatorBuilder: (context, index) => Container(
-                      height: 50,
-                    ),
-                itemCount: users.length,
-                itemBuilder: (context, i) {
-                  return CardUsers(
-                    user: users[i],
-                  );
-                });
-          } else {
-            return Center(
+    return FutureBuilder<Response>(
+      future: Provider.of<ServiceUsers>(context).getUsers(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          final String dataJson = snapshot.data!.bodyString;
+          final List _users = json.decode(dataJson);
+          final List<User> users =
+              _users.map((user) => User.fromJson(user)).toList();
+          return Scaffold(
+            body: CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  title: Text('users'),
+                  floating: true,
+                ),
+                buildUsers(users),
+              ],
+            ),
+          );
+        } else {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('caricamento'),
+            ),
+            body: Center(
               child: CircularProgressIndicator(),
-            );
-          }
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  Widget buildUsers(List<User> users) {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int i) {
+          return CardUsers(
+            user: users[i],
+          );
         },
+        childCount: users.length,
       ),
     );
   }

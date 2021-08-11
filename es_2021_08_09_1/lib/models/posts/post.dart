@@ -3,10 +3,10 @@ import 'package:json_annotation/json_annotation.dart';
 part 'post.g.dart';
 
 @JsonSerializable()
-class Post_ {
-  factory Post_.fromJson(Map<String, dynamic> json) => _$Post_FromJson(json);
+class Post {
+  factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 
-  Map<String, dynamic> toJson() => _$Post_ToJson(this);
+  Map<String, dynamic> toJson() => _$PostToJson(this);
 
   int userId;
 
@@ -16,7 +16,7 @@ class Post_ {
 
   String body;
 
-  Post_({
+  Post({
     required this.id,
     required this.userId,
     required this.body,

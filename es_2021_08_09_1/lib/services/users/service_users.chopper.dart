@@ -17,9 +17,9 @@ class _$ServiceUsers extends ServiceUsers {
   final definitionType = ServiceUsers;
 
   @override
-  Future<Response<List<User>>> getUsers() {
+  Future<Response<dynamic>> getUsers() {
     final $url = '/users';
     final $request = Request('GET', $url, client.baseUrl);
-    return client.send<List<User>, User>($request);
+    return client.send<dynamic, dynamic>($request);
   }
 }

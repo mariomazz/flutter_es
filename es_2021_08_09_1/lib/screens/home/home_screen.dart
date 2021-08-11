@@ -26,16 +26,22 @@ class HomeScreen extends StatelessWidget {
           ),
           Container(
             child: Center(
-              child: ElevatedButton(
-                  onPressed: () => Navigator.of(context).pushNamed('/users'),
-                  child: Text('Page USERS')),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                    onPressed: () => Navigator.of(context).pushNamed('/users'),
+                    child: Text('Page USERS')),
+              ),
             ),
           ),
           Container(
             child: Center(
-              child: ElevatedButton(
-                  onPressed: () => Navigator.of(context).pushNamed('/posts'),
-                  child: Text('Page POSTS')),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                    onPressed: () => Navigator.of(context).pushNamed('/posts'),
+                    child: Text('Page POSTS')),
+              ),
             ),
           ),
         ],

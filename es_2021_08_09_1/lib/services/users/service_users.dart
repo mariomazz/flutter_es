@@ -6,7 +6,7 @@ part 'service_users.chopper.dart';
 @ChopperApi(baseUrl: '/users')
 abstract class ServiceUsers extends ChopperService {
   @Get()
-  Future<Response<List<User>>> getUsers();
+  Future<Response> getUsers();
   static ServiceUsers create() {
     final client = ChopperClient(
       baseUrl: 'https://jsonplaceholder.typicode.com',

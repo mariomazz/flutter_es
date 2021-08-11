@@ -2,7 +2,7 @@ import 'package:es_2021_08_09_1/models/posts/post.dart';
 import 'package:flutter/material.dart';
 
 class CardPosts extends StatelessWidget {
-  final Post_ post;
+  final Post post;
 
   CardPosts({Key? key, required this.post}) : super(key: key);
   final double titleTextSize = 25;
