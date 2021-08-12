@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:chopper/chopper.dart';
 import 'package:myapp/services/users/service_users.dart';
@@ -6,9 +7,14 @@ import 'package:myapp/widgets/users/card_users.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class UsersScreen extends StatelessWidget {
+class UsersScreen extends StatefulWidget {
   UsersScreen({Key? key}) : super(key: key);
 
+  @override
+  _UsersScreenState createState() => _UsersScreenState();
+}
+
+class _UsersScreenState extends State<UsersScreen> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Response>(
@@ -20,14 +26,18 @@ class UsersScreen extends StatelessWidget {
           final List<User> users =
               _users.map((user) => User.fromJson(user)).toList();
           return Scaffold(
-            body: CustomScrollView(
-              slivers: [
+            body: NestedScrollView(
+              headerSliverBuilder: (context, innerBoxScrolled) => [
                 SliverAppBar(
                   title: Text('users'),
                   floating: true,
+                  snap: true,
                 ),
-                buildUsers(users),
               ],
+              body: RefreshIndicator(
+                child: buildUsersListView(users),
+                onRefresh: refresh,
+              ),
             ),
           );
         } else {
@@ -44,7 +54,7 @@ class UsersScreen extends StatelessWidget {
     );
   }
 
-  Widget buildUsers(List<User> users) {
+  Widget buildUsersSliver(List<User> users) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int i) {
@@ -55,5 +65,18 @@ class UsersScreen extends StatelessWidget {
         childCount: users.length,
       ),
     );
+  }
+
+  Widget buildUsersListView(List<User> users) {
+    return ListView.builder(
+      itemBuilder: (context, i) => CardUsers(
+        user: users[i],
+      ),
+      itemCount: users.length,
+    );
+  }
+
+  Future refresh() async {
+    setState(() {});
   }
 }

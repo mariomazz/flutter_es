@@ -6,9 +6,14 @@ import 'package:myapp/widgets/posts/card_posts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PostsScreen extends StatelessWidget {
+class PostsScreen extends StatefulWidget {
   PostsScreen({Key? key}) : super(key: key);
 
+  @override
+  _PostsScreenState createState() => _PostsScreenState();
+}
+
+class _PostsScreenState extends State<PostsScreen> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Response>(
@@ -20,14 +25,18 @@ class PostsScreen extends StatelessWidget {
           final List<post.Post> posts =
               _posts.map((element) => post.Post.fromJson(element)).toList();
           return Scaffold(
-            body: CustomScrollView(
-              slivers: [
+            body: NestedScrollView(
+              headerSliverBuilder: (context, innerBoxScrolled) => [
                 SliverAppBar(
                   title: Text('posts'),
                   floating: true,
+                  snap: true,
                 ),
-                buildPosts(posts),
               ],
+              body: RefreshIndicator(
+                child: buildPostsListView(posts),
+                onRefresh: refresh,
+              ),
             ),
           );
         } else {
@@ -44,7 +53,7 @@ class PostsScreen extends StatelessWidget {
     );
   }
 
-  Widget buildPosts(List<post.Post> posts) {
+  Widget buildPostsSliver(List<post.Post> posts) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int i) {
@@ -55,5 +64,18 @@ class PostsScreen extends StatelessWidget {
         childCount: posts.length,
       ),
     );
+  }
+
+  Widget buildPostsListView(List<post.Post> posts) {
+    return ListView.builder(
+      itemBuilder: (context, i) => CardPosts(
+        post: posts[i],
+      ),
+      itemCount: posts.length,
+    );
+  }
+
+  Future refresh() async {
+    setState(() {});
   }
 }
