@@ -17,15 +17,11 @@ class UsersScreen extends StatefulWidget {
 class _UsersScreenState extends State<UsersScreen> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Response>(
+    return FutureBuilder<Response<List<User>>>(
       future: Provider.of<ServiceUsers>(context).getUsers(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          final String dataJson = snapshot.data!.bodyString;
-          final List _users = json.decode(dataJson);
-          final List<User> users =
-              _users.map((user) => User.fromJson(user)).toList();
-
+          var users = snapshot.data!.body ?? [];
           return Scaffold(
             body: NestedScrollView(
               headerSliverBuilder: (context, innerBoxScrolled) => [

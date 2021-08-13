@@ -1,17 +1,22 @@
 import 'package:chopper/chopper.dart';
+import 'package:myapp/models/posts/post.dart';
+import 'package:myapp/services/posts/model_posts_converter.dart';
+import 'package:myapp/models/posts/post.dart' as post;
+
 part 'service_posts.chopper.dart';
 
 @ChopperApi(baseUrl: '/posts')
 abstract class ServicePosts extends ChopperService {
   @Get()
-  Future<Response> getPosts();
+  Future<Response<List<Post_>>> getPosts();
   static ServicePosts create() {
     final client = ChopperClient(
       baseUrl: 'https://jsonplaceholder.typicode.com',
       services: [
         _$ServicePosts(),
       ],
-      converter: JsonConverter(),
+      converter: ModelPostConverter(),
+      errorConverter: JsonConverter(),
     );
 
     return _$ServicePosts(client);

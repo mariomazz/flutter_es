@@ -17,9 +17,9 @@ class _$ServicePosts extends ServicePosts {
   final definitionType = ServicePosts;
 
   @override
-  Future<Response<dynamic>> getPosts() {
+  Future<Response<List<Post_>>> getPosts() {
     final $url = '/posts';
     final $request = Request('GET', $url, client.baseUrl);
-    return client.send<dynamic, dynamic>($request);
+    return client.send<List<Post_>, Post_>($request);
   }
 }

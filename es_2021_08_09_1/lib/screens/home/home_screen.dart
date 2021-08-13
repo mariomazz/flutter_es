@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/widgets/various/custom_dialog_box.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -41,6 +42,36 @@ class HomeScreen extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: () => Navigator.of(context).pushNamed('/posts'),
                     child: Text('Page POSTS')),
+              ),
+            ),
+          ),
+          Container(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (_) {
+                        return CustomDialogBox(
+                          title: "Crea segnalazione",
+                          descriptions:
+                              "Puoi scegliere di segnalare un problema sul posto o farlo in differita",
+                          primaryButtonTitle: "Segnala users",
+                          primaryButtonDidTapHandler: () {
+                            Navigator.of(context).pushNamed('/users');
+                          },
+                          secondaryButtonTitle: "Segnala posts",
+                          secondaryButtonDidTapHandler: () {
+                            Navigator.of(context).pushNamed('/posts');
+                          },
+                        );
+                      },
+                    );
+                  },
+                  child: Text('Dialog box'),
+                ),
               ),
             ),
           ),

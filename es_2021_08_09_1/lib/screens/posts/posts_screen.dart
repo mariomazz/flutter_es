@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'package:chopper/chopper.dart';
 import 'package:myapp/models/posts/post.dart' as post;
+import 'package:myapp/models/posts/post.dart';
 import 'package:myapp/services/posts/service_posts.dart';
 import 'package:myapp/widgets/posts/card_posts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:share/share.dart';
 
 class PostsScreen extends StatefulWidget {
   PostsScreen({Key? key}) : super(key: key);
@@ -16,14 +18,11 @@ class PostsScreen extends StatefulWidget {
 class _PostsScreenState extends State<PostsScreen> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Response>(
+    return FutureBuilder<Response<List<Post_>>>(
       future: Provider.of<ServicePosts>(context).getPosts(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          final String dataJson = snapshot.data!.bodyString;
-          final List _posts = json.decode(dataJson);
-          final List<post.Post> posts =
-              _posts.map((element) => post.Post.fromJson(element)).toList();
+          var posts = snapshot.data!.body ?? [];
           return Scaffold(
             body: NestedScrollView(
               headerSliverBuilder: (context, innerBoxScrolled) => [
@@ -53,7 +52,7 @@ class _PostsScreenState extends State<PostsScreen> {
     );
   }
 
-  Widget buildPostsSliver(List<post.Post> posts) {
+  Widget buildPostsSliver(List<Post_> posts) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int i) {
@@ -66,10 +65,11 @@ class _PostsScreenState extends State<PostsScreen> {
     );
   }
 
-  Widget buildPostsListView(List<post.Post> posts) {
+  Widget buildPostsListView(List<Post_> posts) {
     return ListView.builder(
       itemBuilder: (context, i) => CardPosts(
         post: posts[i],
+        actionShare: () => Share.share(posts[i].title),
       ),
       itemCount: posts.length,
     );
