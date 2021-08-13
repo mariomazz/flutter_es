@@ -25,6 +25,7 @@ class _UsersScreenState extends State<UsersScreen> {
           final List _users = json.decode(dataJson);
           final List<User> users =
               _users.map((user) => User.fromJson(user)).toList();
+
           return Scaffold(
             body: NestedScrollView(
               headerSliverBuilder: (context, innerBoxScrolled) => [
