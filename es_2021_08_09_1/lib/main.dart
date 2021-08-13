@@ -16,11 +16,13 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider(
-            create: (_) => ServiceUsers.create(),
-            dispose: (_, ServiceUsers service) => service.client.dispose()),
+          create: (_) => ServiceUsers.create(),
+          dispose: (_, ServiceUsers service) => service.client.dispose(),
+        ),
         Provider(
-            create: (_) => ServicePosts.create(),
-            dispose: (_, ServicePosts service) => service.client.dispose()),
+          create: (_) => ServicePosts.create(),
+          dispose: (_, ServicePosts service) => service.client.dispose(),
+        ),
       ],
       child: MaterialApp(
         title: 'App',
