@@ -4,9 +4,9 @@ part 'post.g.dart';
 
 @JsonSerializable()
 class Post_ {
-  factory Post_.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
+  factory Post_.fromJson(Map<String, dynamic> json) => _$Post_FromJson(json);
 
-  Map<String, dynamic> toJson() => _$PostToJson(this);
+  Map<String, dynamic> toJson() => _$Post_ToJson(this);
 
   int userId;
 
