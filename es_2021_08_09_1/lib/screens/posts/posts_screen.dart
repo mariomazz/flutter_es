@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:chopper/chopper.dart';
-import 'package:myapp/models/posts/post.dart' as post;
 import 'package:myapp/models/posts/post.dart';
 import 'package:myapp/services/posts/service_posts.dart';
 import 'package:myapp/widgets/posts/card_posts.dart';
