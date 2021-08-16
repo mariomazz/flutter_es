@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:chopper/chopper.dart';
-import 'package:myapp/models/posts/post.dart' as post;
 import 'package:myapp/models/posts/post.dart';
 
 class ModelPostConverter implements Converter {

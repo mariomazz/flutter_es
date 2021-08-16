@@ -1,7 +1,6 @@
 import 'package:chopper/chopper.dart';
 import 'package:myapp/models/posts/post.dart';
 import 'package:myapp/services/posts/model_posts_converter.dart';
-import 'package:myapp/models/posts/post.dart' as post;
 
 part 'service_posts.chopper.dart';
 
