@@ -28,6 +28,7 @@ class _PostsScreenState extends State<PostsScreen> {
                   title: Text('posts'),
                   floating: true,
                   snap: true,
+                  backgroundColor: Theme.of(context).primaryColor,
                 ),
               ],
               body: RefreshIndicator(
@@ -40,9 +41,12 @@ class _PostsScreenState extends State<PostsScreen> {
           return Scaffold(
             appBar: AppBar(
               title: Text('caricamento'),
+              backgroundColor: Theme.of(context).primaryColor,
             ),
             body: Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: Theme.of(context).primaryColor,
+              ),
             ),
           );
         }
@@ -71,6 +75,7 @@ class _PostsScreenState extends State<PostsScreen> {
       ),
       itemBuilder: (context, i) => CardPosts(
         post: posts[i],
+        actionShare: () => Share.share('${posts[i].title}'),
       ),
       itemCount: posts.length,
     );

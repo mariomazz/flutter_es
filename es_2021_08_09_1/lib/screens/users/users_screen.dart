@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:chopper/chopper.dart';
 import 'package:myapp/services/users/service_users.dart';
 import 'package:myapp/models/users/user.dart';
@@ -29,6 +28,7 @@ class _UsersScreenState extends State<UsersScreen> {
                   title: Text('users'),
                   floating: true,
                   snap: true,
+                  backgroundColor: Theme.of(context).primaryColor,
                 ),
               ],
               body: RefreshIndicator(
@@ -41,9 +41,12 @@ class _UsersScreenState extends State<UsersScreen> {
           return Scaffold(
             appBar: AppBar(
               title: Text('caricamento'),
+              backgroundColor: Theme.of(context).primaryColor,
             ),
             body: Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: Theme.of(context).primaryColor,
+              ),
             ),
           );
         }
