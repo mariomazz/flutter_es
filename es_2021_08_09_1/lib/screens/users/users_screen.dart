@@ -65,7 +65,11 @@ class _UsersScreenState extends State<UsersScreen> {
   }
 
   Widget buildUsersListView(List<User> users) {
-    return ListView.builder(
+    return ListView.separated(
+      separatorBuilder: (context, index) => Container(
+        height: 50,
+        width: double.infinity,
+      ),
       itemBuilder: (context, i) => CardUsers(
         user: users[i],
       ),

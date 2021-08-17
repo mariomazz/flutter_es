@@ -9,11 +9,29 @@ class CardUsers extends StatelessWidget {
   final double textSize = 20;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
+    return Container(
+      margin: const EdgeInsets.all(15.0),
+      decoration: new BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(40),
+          topRight: Radius.circular(40),
+          bottomLeft: Radius.circular(40),
+          bottomRight: Radius.circular(40),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
       child: Card(
-        elevation: 5,
-        color: Colors.redAccent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(40),
+        ),
+        color: Theme.of(context).secondaryHeaderColor,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -59,6 +77,9 @@ class CardUsers extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -91,7 +112,11 @@ class CardUsers extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Card(
-                            color: Colors.blueAccent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            color:
+                                Theme.of(context).primaryColor.withOpacity(0.7),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
@@ -140,6 +165,9 @@ class CardUsers extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(

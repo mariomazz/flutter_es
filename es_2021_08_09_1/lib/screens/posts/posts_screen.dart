@@ -64,10 +64,13 @@ class _PostsScreenState extends State<PostsScreen> {
   }
 
   Widget buildPostsListView(List<Post_> posts) {
-    return ListView.builder(
+    return ListView.separated(
+      separatorBuilder: (context, index) => Container(
+        height: 50,
+        width: double.infinity,
+      ),
       itemBuilder: (context, i) => CardPosts(
         post: posts[i],
-        actionShare: () => Share.share(posts[i].title),
       ),
       itemCount: posts.length,
     );

@@ -28,7 +28,8 @@ class MyApp extends StatelessWidget {
         title: 'App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: Colors.red,
+          secondaryHeaderColor: Color.fromRGBO(255, 234, 174, 1),
         ),
         initialRoute: '/',
         onGenerateRoute: RouteGenerator.generateRoute,
