@@ -1,30 +1,6 @@
-/*
- * Copyright (c) 2020 Razeware LLC
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-
-import '../models/recipe_model.dart';
-import '../constants/app_image_paths.dart';
-import '../constants/colors.dart';
-
-/// Some of the recipes' data is from https://twitter.com/JordanKAdams97/status/996838075128057858
+import 'package:reciperlich/constants/app_image_paths.dart';
+import 'package:reciperlich/constants/colors.dart';
+import 'package:reciperlich/models/recipe_model.dart';
 
 class RecipeRepository {
   static List<RecipeModel> getRecipes() => const [
@@ -52,8 +28,7 @@ class RecipeRepository {
             '5 minutes CookTime',
             '\$2.00 Cost'
           ],
-          whereToBuy:
-              '''Walmart and Target''',
+          whereToBuy: '''Walmart and Target''',
           ingredients: [
             'Melted cheese',
             'Macaroni',
@@ -80,7 +55,7 @@ class RecipeRepository {
           whereToBuy: '''I don't know where''',
           ingredients: [
             'meat'
-            'lettuce',
+                'lettuce',
             'Taco shells',
             'Cheese',
             'Lettuce',
@@ -110,49 +85,37 @@ class RecipeRepository {
           mainImagePath: AppImagePaths.pancakesImage,
           itemColor: AppColors.lightBlue,
         ),
-
-    RecipeModel(
-      title: 'Michael’s Icecream',
-      details: [
-        '1 Servings',
-        '1 minute Preptime',
-        '1 minute CookTime',
-        '\$3 Cost'
-      ],
-      whereToBuy: '''Icecream shop''',
-      ingredients: [
-        'Milk',
-        'Cow',
-        'Ice cream',
-        'toys'
-      ],
-      instructions:
-      '''You go to the ice cream shop... and.. you tell them you want ice cream and you get it and get out''',
-      iconPath: AppImagePaths.iceCreamIcon,
-      mainImagePath: AppImagePaths.iceCreamImage,
-      itemColor: AppColors.orange,
-    ),
-
-    RecipeModel(
-      title: 'Madonna’s Croissant',
-      details: [
-        '14 Servings',
-        '100 minute Preptime',
-        '1000 minute CookTime',
-        '\$44 Cost'
-      ],
-      whereToBuy: '''Croissant place''',
-      ingredients: [
-        'bread',
-        'honey',
-        'crackers',
-        'football'
-      ],
-      instructions:
-      '''I have croissant in my drawer.. you go to my house and get the croissant''',
-      iconPath: AppImagePaths.croissantIcon,
-      mainImagePath: AppImagePaths.croissantImage,
-      itemColor: AppColors.green,
-    ),
+        RecipeModel(
+          title: 'Michael’s Icecream',
+          details: [
+            '1 Servings',
+            '1 minute Preptime',
+            '1 minute CookTime',
+            '\$3 Cost'
+          ],
+          whereToBuy: '''Icecream shop''',
+          ingredients: ['Milk', 'Cow', 'Ice cream', 'toys'],
+          instructions:
+              '''You go to the ice cream shop... and.. you tell them you want ice cream and you get it and get out''',
+          iconPath: AppImagePaths.iceCreamIcon,
+          mainImagePath: AppImagePaths.iceCreamImage,
+          itemColor: AppColors.orange,
+        ),
+        RecipeModel(
+          title: 'Madonna’s Croissant',
+          details: [
+            '14 Servings',
+            '100 minute Preptime',
+            '1000 minute CookTime',
+            '\$44 Cost'
+          ],
+          whereToBuy: '''Croissant place''',
+          ingredients: ['bread', 'honey', 'crackers', 'football'],
+          instructions:
+              '''I have croissant in my drawer.. you go to my house and get the croissant''',
+          iconPath: AppImagePaths.croissantIcon,
+          mainImagePath: AppImagePaths.croissantImage,
+          itemColor: AppColors.green,
+        ),
       ];
 }

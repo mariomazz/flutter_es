@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/recipe_list/recipe_list_page.dart';
+import 'package:reciperlich/pages/recipe_list/recipe_list_page.dart';
 
 void main() {
   runApp(MyApp());
