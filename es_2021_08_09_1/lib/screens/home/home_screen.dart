@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   child: Text(
-                    "Buy now".toUpperCase(),
+                    "page users".toUpperCase(),
                     style: TextStyle(fontSize: 14),
                   ),
                   style: ButtonStyle(
