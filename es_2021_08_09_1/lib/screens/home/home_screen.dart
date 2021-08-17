@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/widgets/various-widgets/custom_dialog_box.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,10 +29,9 @@ class HomeScreen extends StatelessWidget {
         ],
         automaticallyImplyLeading: false,
       ),
-      body: Flex(
+      body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        direction: Axis.vertical,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             child: Center(
