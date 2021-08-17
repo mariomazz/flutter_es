@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/widgets/various/custom_dialog_box.dart';
+import 'package:myapp/widgets/various-widgets/custom_dialog_box.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
