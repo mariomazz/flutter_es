@@ -15,9 +15,28 @@ class CardPosts extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          margin: EdgeInsets.all(20),
+          margin: EdgeInsets.all(15),
+          decoration: new BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(40),
+              topRight: Radius.circular(40),
+              bottomLeft: Radius.circular(40),
+              bottomRight: Radius.circular(40),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
           child: Card(
-            color: Colors.blueAccent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(40),
+            ),
+            color: Theme.of(context).secondaryHeaderColor,
             elevation: 5,
             child: Column(
               children: [
@@ -79,8 +98,8 @@ class CardPosts extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 20,
-          right: 20,
+          top: 40,
+          right: 40,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
