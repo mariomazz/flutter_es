@@ -1,5 +1,8 @@
+import 'package:animated_icon_button/animated_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/widgets/various-widgets/custom_dialog_box.dart';
+import 'package:myapp/widgets/various-widgets/show_bottom_scheet.dart';
+import 'package:myapp/widgets/various-widgets/show_dialog.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -19,7 +22,15 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: EdgeInsets.only(right: 20.0),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () => BottomScheet.show(
+                context: context,
+                widget: Center(
+                  child: Icon(
+                    Icons.access_alarm,
+                    size: 45.0,
+                  ),
+                ),
+              ),
               child: Icon(
                 Icons.access_alarm,
                 size: 26.0,
@@ -57,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  onPressed: () => dialogBox(context),
+                  onPressed: () => Navigator.of(context).pushNamed('/users'),
                 ),
               ),
             ),
@@ -84,34 +95,43 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  onPressed: () => dialogBox(context),
+                  onPressed: () => Navigator.of(context).pushNamed('/posts'),
                 ),
               ),
             ),
           ),
         ],
       ),
-    );
-  }
-
-  void dialogBox(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) {
-        return CustomDialogBox(
-          title: "Crea segnalazione",
-          descriptions:
-              "Puoi scegliere di segnalare un problema sul posto o farlo in differita",
-          primaryButtonTitle: "Segnala users",
-          primaryButtonDidTapHandler: () {
-            Navigator.of(context).pushNamed('/users');
-          },
-          secondaryButtonTitle: "Segnala posts",
-          secondaryButtonDidTapHandler: () {
-            Navigator.of(context).pushNamed('/posts');
-          },
-        );
-      },
+      floatingActionButton: AnimatedIconButton(
+        size: 50,
+        onPressed: () => DialogBox.show(
+          context: context,
+          widget: CustomDialogBox(
+            title: "Crea segnalazione",
+            descriptions:
+                "Puoi scegliere di segnalare un problema sul posto o farlo in differita",
+            primaryButtonTitle: "Segnala users",
+            primaryButtonDidTapHandler: () {
+              Navigator.of(context).pushNamed('/users');
+            },
+            secondaryButtonTitle: "Segnala posts",
+            secondaryButtonDidTapHandler: () {
+              Navigator.of(context).pushNamed('/posts');
+            },
+          ),
+        ),
+        duration: const Duration(milliseconds: 500),
+        splashColor: Colors.transparent,
+        icons: <AnimatedIconItem>[
+          AnimatedIconItem(
+            icon: Icon(Icons.add, color: Theme.of(context).primaryColor),
+          ),
+          AnimatedIconItem(
+            icon: Icon(Icons.close, color: Theme.of(context).primaryColor),
+          ),
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 }
