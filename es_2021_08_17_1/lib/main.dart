@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Reciperlich',
-      theme: ThemeData.light(),
+      theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
       home: const RecipeListPage(),
     );
