@@ -1,8 +1,8 @@
 import 'package:animated_icon_button/animated_icon_button.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/widgets/various-widgets/custom_dialog_box.dart';
-import 'package:myapp/widgets/various-widgets/show_bottom_scheet.dart';
-import 'package:myapp/widgets/various-widgets/show_dialog.dart';
+import 'package:myapp/widgets/shared/custom_dialog_box.dart';
+import 'package:myapp/widgets/shared/show_bottom_scheet.dart';
+import 'package:myapp/widgets/shared/show_dialog.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

@@ -20,6 +20,23 @@ class RouteGenerator {
       case '/users':
         return CupertinoPageRoute(builder: (_) {
           return UsersScreen();
+          /*if (args is Map<String, bool>) {
+            bool checkedMySegnalation = args['checked-my-segnalation']!;
+
+            if (checkedMySegnalation) {
+              return Scaffold(
+                body: Container(
+                  child: Center(
+                    child: Text('visualization all segnalation'),
+                  ),
+                ),
+              );
+            } else {
+              return UsersScreen();
+            }
+          } else {
+            return UsersScreen();
+          }*/
         });
       default:
         return _errorRoute();

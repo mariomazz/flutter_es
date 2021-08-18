@@ -1,6 +1,5 @@
 import 'package:myapp/models/posts/post.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/widgets/various-widgets/show_dialog.dart';
 
 class CardPosts extends StatelessWidget {
   final Post_ post;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BottomScheet {
-  BottomScheet.show({required BuildContext context, required Widget widget}) {
+  static show({required BuildContext context, required Widget widget}) {
     showModalBottomSheet(
       backgroundColor: Colors.transparent,
       context: context,
