@@ -13,14 +13,6 @@ class PostsScreen extends StatefulWidget {
 }
 
 class _PostsScreenState extends State<PostsScreen> {
-  int number = 0;
-
-  increment() {
-    setState(() {
-      number += 1;
-    });
-  }
-
   Future<Response<List<Post_>>>? posts;
 
   @override
@@ -59,37 +51,18 @@ class _PostsScreenState extends State<PostsScreen> {
         } else {
           final posts = snapshot.data!.body ?? <Post_>[];
 
-          return Scaffold(
-            appBar: AppBar(
-              title: Text('posts screen'),
-            ),
-            body: new Scrollbar(
-              child: new RefreshIndicator(
-                child: ListView.builder(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: posts.length,
-                  itemBuilder: (context, index) {
-                    return CardPosts(
-                      post: posts[index],
-                    );
-                  },
-                ),
-                onRefresh: refreshPosts,
+          return Scrollbar(
+            child: new RefreshIndicator(
+              child: ListView.builder(
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemCount: posts.length,
+                itemBuilder: (context, index) {
+                  return CardPosts(
+                    post: posts[index],
+                  );
+                },
               ),
-            ),
-            floatingActionButton: ClipOval(
-              child: Material(
-                color: Colors.blue, // Button color
-                child: InkWell(
-                  splashColor: Colors.red, // Splash color
-                  onTap: () {
-                    increment();
-                    print(number);
-                  },
-                  child:
-                      SizedBox(width: 56, height: 56, child: Icon(Icons.menu)),
-                ),
-              ),
+              onRefresh: refreshPosts,
             ),
           );
         }
