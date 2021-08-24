@@ -6,18 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PostsScreen extends StatefulWidget {
-  PostsScreen({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const PostsScreen({Key? key}) : super(key: key);
 
   @override
   _PostsScreenState createState() => _PostsScreenState();
 }
 
 class _PostsScreenState extends State<PostsScreen> {
-  var posts;
+  int number = 0;
 
-  int _counter = 0;
+  increment() {
+    setState(() {
+      number += 1;
+    });
+  }
+
+  Future<Response<List<Post_>>>? posts;
 
   @override
   void initState() {
@@ -26,53 +30,70 @@ class _PostsScreenState extends State<PostsScreen> {
     posts = updateAndGetPosts();
   }
 
-  Future<Response<List<Post_>>> updateAndGetPosts() async {
-    var posts = Provider.of<ServicePosts>(context).getPosts();
-    return posts;
-  }
-
-  void refreshPosts() {
+  Future refreshPosts() async {
     setState(() {
       posts = updateAndGetPosts();
     });
   }
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  Future<Response<List<Post_>>> updateAndGetPosts() async {
+    return await Provider.of<ServicePosts>(context, listen: false).getPosts();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: FutureBuilder<Response<List<Post_>>>(
-        future: posts,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            final posts = snapshot.data!.body;
-            print(snapshot.data);
-            return PageView.builder(
-              itemBuilder: (context, index) {
-                return Container();
-              },
-              //itemCount: posts.length,
-            );
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+    return new FutureBuilder<Response<List<Post_>>>(
+      future: posts,
+      builder: (BuildContext context,
+          AsyncSnapshot<Response<List<Post_>>> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Scaffold(
+            body: new Center(
+              child: new CircularProgressIndicator(),
+            ),
+          );
+        } else if (snapshot.hasError) {
+          print(snapshot.error);
+          return Scaffold(
+              body: Center(child: new Text('Error: ${snapshot.error}')));
+        } else {
+          final posts = snapshot.data!.body ?? <Post_>[];
+
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('posts screen'),
+            ),
+            body: new Scrollbar(
+              child: new RefreshIndicator(
+                child: ListView.builder(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  itemCount: posts.length,
+                  itemBuilder: (context, index) {
+                    return CardPosts(
+                      post: posts[index],
+                    );
+                  },
+                ),
+                onRefresh: refreshPosts,
+              ),
+            ),
+            floatingActionButton: ClipOval(
+              child: Material(
+                color: Colors.blue, // Button color
+                child: InkWell(
+                  splashColor: Colors.red, // Splash color
+                  onTap: () {
+                    increment();
+                    print(number);
+                  },
+                  child:
+                      SizedBox(width: 56, height: 56, child: Icon(Icons.menu)),
+                ),
+              ),
+            ),
+          );
+        }
+      },
     );
   }
 }

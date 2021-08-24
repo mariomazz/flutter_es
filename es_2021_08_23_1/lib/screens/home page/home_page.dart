@@ -6,6 +6,6 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PostsScreen(title: 'posts screen',);
+    return PostsScreen();
   }
 }
