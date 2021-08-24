@@ -24,6 +24,7 @@ dependencies:
   chopper: ^4.0.1
   flutter:
     sdk: flutter
+  material_segmented_control: ^3.1.2
   provider: ^5.0.0
 
 
