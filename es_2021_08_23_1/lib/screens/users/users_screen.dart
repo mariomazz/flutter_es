@@ -15,16 +15,14 @@ class _UsersScreenState extends State<UsersScreen> {
   Widget build(BuildContext context) => buildUsersCard();
 
   Widget buildUsersCard() {
-    return Expanded(
-      child: ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(),
-        itemCount: widget.users.length,
-        itemBuilder: (context, index) {
-          return CardUsers(
-            user: widget.users[index],
-          );
-        },
-      ),
+    return ListView.builder(
+      physics: const AlwaysScrollableScrollPhysics(),
+      itemCount: widget.users.length,
+      itemBuilder: (context, index) {
+        return CardUsers(
+          user: widget.users[index],
+        );
+      },
     );
   }
 }
