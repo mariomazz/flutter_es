@@ -105,7 +105,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     } else {
                       final posts = snapshot.data!.body ?? <Post_>[];
 
-                      return PostsScreen(posts: posts);
+                      return Expanded(
+                        child: RefreshIndicator(
+                          child: PostsScreen(posts: posts),
+                          onRefresh: refreshPosts,
+                        ),
+                      );
                     }
                   },
                 )
@@ -127,7 +132,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     } else {
                       final users = snapshot.data!.body ?? <User>[];
 
-                      return UsersScreen(users: users);
+                      return Expanded(
+                        child: RefreshIndicator(
+                          child: UsersScreen(users: users),
+                          onRefresh: refreshUsers,
+                        ),
+                      );
                     }
                   },
                 )

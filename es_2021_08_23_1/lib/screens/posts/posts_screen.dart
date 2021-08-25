@@ -16,16 +16,14 @@ class _PostsScreenState extends State<PostsScreen> {
   Widget build(BuildContext context) => buildPostsCard();
 
   Widget buildPostsCard() {
-    return Expanded(
-      child: ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(),
-        itemCount: widget.posts.length,
-        itemBuilder: (context, index) {
-          return CardPosts(
-            post: widget.posts[index],
-          );
-        },
-      ),
+    return ListView.builder(
+      physics: const AlwaysScrollableScrollPhysics(),
+      itemCount: widget.posts.length,
+      itemBuilder: (context, index) {
+        return CardPosts(
+          post: widget.posts[index],
+        );
+      },
     );
   }
 }
