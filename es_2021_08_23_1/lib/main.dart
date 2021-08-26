@@ -1,3 +1,4 @@
+import 'package:es_2021_08_23_1/config/routes/route_generator.dart';
 import 'package:es_2021_08_23_1/screens/home%20page/home_page.dart';
 import 'package:es_2021_08_23_1/services/posts/service_posts.dart';
 import 'package:es_2021_08_23_1/services/users/service_users.dart';
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: MyHomePage(),
+        initialRoute: '/',
+        onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );
   }
