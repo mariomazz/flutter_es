@@ -99,8 +99,33 @@ class _MyHomePageState extends State<MyHomePage> {
                       );
                     } else if (snapshot.hasError) {
                       print(snapshot.error);
-                      return Center(
-                        child: new Text('Error: ${snapshot.error}'),
+                      return Expanded(
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Icon(
+                                  Icons.error_outline_rounded,
+                                  size: 90,
+                                  color: Colors.red.withOpacity(0.5),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: refreshPosts,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Icon(
+                                    Icons.refresh_rounded,
+                                    size: 110,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       );
                     } else {
                       final posts = snapshot.data!.body ?? <Post_>[];
@@ -126,8 +151,33 @@ class _MyHomePageState extends State<MyHomePage> {
                       );
                     } else if (snapshot.hasError) {
                       print(snapshot.error);
-                      return Center(
-                        child: new Text('Error: ${snapshot.error}'),
+                      return Expanded(
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Icon(
+                                  Icons.error_outline_rounded,
+                                  size: 90,
+                                  color: Colors.red.withOpacity(0.5),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: refreshUsers,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Icon(
+                                    Icons.refresh_rounded,
+                                    size: 110,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       );
                     } else {
                       final users = snapshot.data!.body ?? <User>[];
