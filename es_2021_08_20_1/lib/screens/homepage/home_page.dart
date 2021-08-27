@@ -7,6 +7,7 @@ import 'package:es_2021_08_20_1/services/posts/service_posts.dart';
 import 'package:es_2021_08_20_1/services/users/service_users.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -58,23 +59,20 @@ class MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    AppBar appBar;
+    String titleAppBar;
     if (indexPage == 0) {
-      appBar = AppBar(
-        title: Text('page posts'),
-      );
+      titleAppBar = 'page posts';
     } else if (indexPage == 1) {
-      appBar = AppBar(
-        title: Text('page users'),
-      );
+      titleAppBar = 'page users';
     } else {
-      appBar = AppBar(
-        title: Text('app bar'),
-      );
+      titleAppBar = 'app bar';
     }
 
     return Scaffold(
-      appBar: appBar,
+      appBar: AppBar(
+        elevation: 0,
+        title: Text(titleAppBar),
+      ),
       body: PageView.builder(
         controller: pageController,
         itemBuilder: (_, index) {
@@ -131,7 +129,8 @@ class MyHomePageState extends State<MyHomePage> {
         } else {
           final posts = snapshot.data!.body ?? <Post_>[];
 
-          return RefreshIndicator(
+          return LiquidPullToRefresh(
+            color: Theme.of(context).primaryColor,
             child: PostsScreen(posts: posts),
             onRefresh: refreshPosts,
           );
@@ -180,7 +179,8 @@ class MyHomePageState extends State<MyHomePage> {
         } else {
           final users = snapshot.data!.body ?? <User>[];
 
-          return RefreshIndicator(
+          return LiquidPullToRefresh(
+            color: Theme.of(context).primaryColor,
             child: UsersScreen(users: users),
             onRefresh: refreshUsers,
           );

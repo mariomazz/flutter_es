@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   chopper: ^4.0.1
+  liquid_pull_to_refresh: ^3.0.0
   http:
   provider: ^5.0.0
   share: ^2.0.4
