@@ -5,7 +5,9 @@ import 'package:es_2021_08_20_1/screens/posts/posts_screen.dart';
 import 'package:es_2021_08_20_1/screens/users/users_screen.dart';
 import 'package:es_2021_08_20_1/services/posts/service_posts.dart';
 import 'package:es_2021_08_20_1/services/users/service_users.dart';
+import 'package:es_2021_08_20_1/widgets/shared/progress-indicator/progress_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:gradient_progress_indicator/widget/gradient_progress_indicator_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
@@ -95,9 +97,7 @@ class MyHomePageState extends State<MyHomePage> {
       builder: (BuildContext context,
           AsyncSnapshot<Response<List<Post_>>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return new Center(
-            child: new CircularProgressIndicator(),
-          );
+          return CustomProgressIndicator();
         } else if (snapshot.hasError) {
           print(snapshot.error);
           return Center(
@@ -130,6 +130,7 @@ class MyHomePageState extends State<MyHomePage> {
           final posts = snapshot.data!.body ?? <Post_>[];
 
           return LiquidPullToRefresh(
+            height: 80,
             color: Theme.of(context).primaryColor,
             child: PostsScreen(posts: posts),
             onRefresh: refreshPosts,
@@ -145,9 +146,7 @@ class MyHomePageState extends State<MyHomePage> {
       builder:
           (BuildContext context, AsyncSnapshot<Response<List<User>>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return new Center(
-            child: new CircularProgressIndicator(),
-          );
+          return CustomProgressIndicator();
         } else if (snapshot.hasError) {
           print(snapshot.error);
           return Center(
@@ -180,6 +179,7 @@ class MyHomePageState extends State<MyHomePage> {
           final users = snapshot.data!.body ?? <User>[];
 
           return LiquidPullToRefresh(
+            height: 80,
             color: Theme.of(context).primaryColor,
             child: UsersScreen(users: users),
             onRefresh: refreshUsers,
