@@ -7,7 +7,6 @@ import 'package:es_2021_08_20_1/services/posts/service_posts.dart';
 import 'package:es_2021_08_20_1/services/users/service_users.dart';
 import 'package:es_2021_08_20_1/widgets/shared/progress-indicator/progress_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:gradient_progress_indicator/widget/gradient_progress_indicator_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
