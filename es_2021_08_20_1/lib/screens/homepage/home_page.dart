@@ -57,21 +57,39 @@ class MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: PageView.builder(
-          controller: pageController,
-          itemBuilder: (_, index) {
-            if (index == 0) {
-              return pagePosts(context);
-            } else if (index == 1) {
-              return pageUsers(context);
-            }
-
-            return errorPage();
-          },
-          itemCount: 2,
-        ),
+  Widget build(BuildContext context) {
+    AppBar appBar;
+    if (indexPage == 0) {
+      appBar = AppBar(
+        title: Text('page posts'),
       );
+    } else if (indexPage == 1) {
+      appBar = AppBar(
+        title: Text('page users'),
+      );
+    } else {
+      appBar = AppBar(
+        title: Text('app bar'),
+      );
+    }
+
+    return Scaffold(
+      appBar: appBar,
+      body: PageView.builder(
+        controller: pageController,
+        itemBuilder: (_, index) {
+          if (index == 0) {
+            return pagePosts(context);
+          } else if (index == 1) {
+            return pageUsers(context);
+          }
+
+          return pageError();
+        },
+        itemCount: 2,
+      ),
+    );
+  }
 
   Widget pagePosts(BuildContext context) {
     return FutureBuilder<Response<List<Post_>>>(
@@ -171,7 +189,7 @@ class MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget errorPage() {
+  Widget pageError() {
     return Container(
       child: Center(child: Text('error page build')),
     );
