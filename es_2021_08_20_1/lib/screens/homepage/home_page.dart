@@ -7,6 +7,7 @@ import 'package:es_2021_08_20_1/services/posts/service_posts.dart';
 import 'package:es_2021_08_20_1/services/users/service_users.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -69,6 +70,7 @@ class MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text(titleAppBar),
       ),
       body: PageView.builder(
@@ -127,7 +129,8 @@ class MyHomePageState extends State<MyHomePage> {
         } else {
           final posts = snapshot.data!.body ?? <Post_>[];
 
-          return RefreshIndicator(
+          return LiquidPullToRefresh(
+            color: Theme.of(context).primaryColor,
             child: PostsScreen(posts: posts),
             onRefresh: refreshPosts,
           );
@@ -176,7 +179,8 @@ class MyHomePageState extends State<MyHomePage> {
         } else {
           final users = snapshot.data!.body ?? <User>[];
 
-          return RefreshIndicator(
+          return LiquidPullToRefresh(
+            color: Theme.of(context).primaryColor,
             child: UsersScreen(users: users),
             onRefresh: refreshUsers,
           );
