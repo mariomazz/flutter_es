@@ -58,23 +58,19 @@ class MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    AppBar appBar;
+    String titleAppBar;
     if (indexPage == 0) {
-      appBar = AppBar(
-        title: Text('page posts'),
-      );
+      titleAppBar = 'page posts';
     } else if (indexPage == 1) {
-      appBar = AppBar(
-        title: Text('page users'),
-      );
+      titleAppBar = 'page users';
     } else {
-      appBar = AppBar(
-        title: Text('app bar'),
-      );
+      titleAppBar = 'app bar';
     }
 
     return Scaffold(
-      appBar: appBar,
+      appBar: AppBar(
+        title: Text(titleAppBar),
+      ),
       body: PageView.builder(
         controller: pageController,
         itemBuilder: (_, index) {
