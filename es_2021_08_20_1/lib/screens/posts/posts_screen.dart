@@ -10,9 +10,18 @@ class PostsScreen extends StatelessWidget {
   Widget build(BuildContext context) => buildPostsCard();
 
   Widget buildPostsCard() {
-    return ListView.builder(
+    return ListView.separated(
       physics: const AlwaysScrollableScrollPhysics(),
       itemCount: posts.length,
+      separatorBuilder: (context, index) {
+        return Divider(
+          height: 20,
+          color: Theme.of(context).primaryColor.withOpacity(0.6),
+          indent: 10,
+          endIndent: 10,
+          thickness: 10,
+        );
+      },
       itemBuilder: (context, index) {
         return CardPosts(
           post: posts[index],

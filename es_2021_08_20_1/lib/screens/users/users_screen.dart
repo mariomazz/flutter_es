@@ -10,8 +10,17 @@ class UsersScreen extends StatelessWidget {
   Widget build(BuildContext context) => buildUsersCard();
 
   Widget buildUsersCard() {
-    return ListView.builder(
+    return ListView.separated(
       physics: const AlwaysScrollableScrollPhysics(),
+      separatorBuilder: (context, index) {
+        return Divider(
+          height: 20,
+          color: Theme.of(context).primaryColor.withOpacity(0.6),
+          indent: 10,
+          endIndent: 10,
+          thickness: 10,
+        );
+      },
       itemCount: users.length,
       itemBuilder: (context, index) {
         return CardUsers(
