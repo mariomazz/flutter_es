@@ -7,7 +7,6 @@ import 'package:es_2021_08_20_1/services/posts/service_posts.dart';
 import 'package:es_2021_08_20_1/services/users/service_users.dart';
 import 'package:es_2021_08_20_1/widgets/shared/progress-indicator/progress_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:gradient_progress_indicator/widget/gradient_progress_indicator_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
@@ -71,22 +70,53 @@ class MyHomePageState extends State<MyHomePage> {
     }
 
     return Scaffold(
+      drawer: drawer(context),
       appBar: AppBar(
         elevation: 0,
         title: Text(titleAppBar),
       ),
-      body: PageView.builder(
+      body: PageView(
         controller: pageController,
-        itemBuilder: (_, index) {
-          if (index == 0) {
-            return pagePosts(context);
-          } else if (index == 1) {
-            return pageUsers(context);
-          }
+        children: [
+          pagePosts(context),
+          pageUsers(context),
+        ],
+      ),
+    );
+  }
 
-          return pageError();
-        },
-        itemCount: 2,
+  Widget drawer(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            child: Text('Menu drawer'),
+            decoration: BoxDecoration(
+              color: Colors.yellowAccent.shade100,
+            ),
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.home,
+              size: 40,
+            ),
+            title: Text('First item'),
+            subtitle: Text("This is the 1st item"),
+            trailing: Icon(Icons.more_vert),
+            onTap: () {},
+          ),
+          ListTile(
+            title: Text('Second item'),
+            onTap: () {},
+          ),
+          ListTile(
+            title: Text('Close the menu'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          )
+        ],
       ),
     );
   }
