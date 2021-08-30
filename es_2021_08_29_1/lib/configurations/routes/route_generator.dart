@@ -1,6 +1,7 @@
 import 'package:es_2021_08_29_1/screens/create-new-account.dart';
 import 'package:es_2021_08_29_1/screens/forgot-password.dart';
 import 'package:es_2021_08_29_1/screens/login-screen.dart';
+import 'package:es_2021_08_29_1/screens/registration/registration_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,10 @@ class RouteGenerator {
         return CupertinoPageRoute(builder: (_) {
           return CreateNewAccount();
         });
-
+      case '/registration':
+        return CupertinoPageRoute(builder: (_) {
+          return RegistrationScreen();
+        });
       default:
         return _errorRoute();
     }

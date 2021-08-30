@@ -1,8 +1,9 @@
-import 'package:es_2021_08_29_1/routes/route_generator.dart';
 import 'package:es_2021_08_29_1/services/registration.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
+import 'configurations/routes/route_generator.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        initialRoute: '/',
+        initialRoute: '/registration',
         onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );

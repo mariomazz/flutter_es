@@ -11,7 +11,7 @@ abstract class RegistrationService extends ChopperService {
 
   static RegistrationService create() {
     final client = ChopperClient(
-      baseUrl: 'http://localhost',
+      baseUrl: 'http://localhost:3000',
       services: [
         _$RegistrationService(),
       ],
