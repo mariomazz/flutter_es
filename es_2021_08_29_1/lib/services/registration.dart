@@ -4,7 +4,9 @@ part 'registration.chopper.dart';
 
 @ChopperApi(baseUrl: '/registered-users')
 abstract class RegistrationService extends ChopperService {
-  @Post()
+  @Post(
+    headers: {"Content-Type": "application/json"},
+  )
   Future<Response> registrationRequest(
     @Body() Map<String, dynamic> body,
   );

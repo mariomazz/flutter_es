@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:chopper/chopper.dart';
 import 'package:es_2021_08_29_1/services/registration.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +24,10 @@ class RegistrationScreen extends StatelessWidget {
               child: Text('error'),
             );
           } else {
+            // var response = snapshot.data!.bodyString;
+            var response = json.decode(snapshot.data!.bodyString);
             return Center(
-              child: Text('success post : ${snapshot.data!.bodyString}'),
+              child: Text(response.toString()),
             );
           }
         },
