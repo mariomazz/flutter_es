@@ -5,8 +5,9 @@ class RoundedButton extends StatelessWidget {
   const RoundedButton({
     Key? key,
     required this.buttonName,
+    this.action,
   }) : super(key: key);
-
+  final void Function()? action;
   final String buttonName;
 
   @override
@@ -20,7 +21,7 @@ class RoundedButton extends StatelessWidget {
         color: kBlue,
       ),
       child: FlatButton(
-        onPressed: () {},
+        onPressed: action,
         child: Text(
           buttonName,
           style: kBodyText.copyWith(fontWeight: FontWeight.bold),

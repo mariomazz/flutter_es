@@ -91,7 +91,10 @@ class CreateNewAccount extends StatelessWidget {
                     SizedBox(
                       height: 25,
                     ),
-                    RoundedButton(buttonName: 'Register'),
+                    RoundedButton(
+                      buttonName: 'Register',
+                      action: () => Navigator.pushNamed(context, '/registration-request'),
+                    ),
                     SizedBox(
                       height: 30,
                     ),
