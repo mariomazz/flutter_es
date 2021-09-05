@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:chopper/chopper.dart';
-import 'package:es_2021_08_20_1/models/users/user.dart';
+import 'package:pageview/models/users/user.dart';
 
 class ModelUserConverter implements Converter {
   @override

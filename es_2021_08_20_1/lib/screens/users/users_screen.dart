@@ -1,7 +1,8 @@
-import 'package:es_2021_08_20_1/models/users/user.dart';
-import 'package:es_2021_08_20_1/widgets/users/card_users.dart';
+
 
 import 'package:flutter/material.dart';
+import 'package:pageview/models/users/user.dart';
+import 'package:pageview/widgets/users/card_users.dart';
 
 class UsersScreen extends StatelessWidget {
   const UsersScreen({Key? key, required this.users}) : super(key: key);

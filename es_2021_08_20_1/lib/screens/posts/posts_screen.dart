@@ -1,7 +1,8 @@
-import 'package:es_2021_08_20_1/models/posts/post.dart';
-import 'package:es_2021_08_20_1/widgets/posts/card_posts.dart';
+
 
 import 'package:flutter/material.dart';
+import 'package:pageview/models/posts/post.dart';
+import 'package:pageview/widgets/posts/card_posts.dart';
 
 class PostsScreen extends StatelessWidget {
   const PostsScreen({Key? key, required this.posts}) : super(key: key);

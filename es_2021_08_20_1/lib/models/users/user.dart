@@ -1,7 +1,7 @@
-import 'package:es_2021_08_20_1/models/users/address.dart';
-import 'package:es_2021_08_20_1/models/users/company.dart';
 
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pageview/models/users/address.dart';
+import 'package:pageview/models/users/company.dart';
 
 part 'user.g.dart';
 
