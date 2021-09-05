@@ -1,7 +1,7 @@
-import 'package:es_2021_08_20_1/config/routes/route_generator.dart';
-import 'package:es_2021_08_20_1/services/posts/service_posts.dart';
-import 'package:es_2021_08_20_1/services/users/service_users.dart';
 import 'package:flutter/material.dart';
+import 'package:pageview/config/routes/route_generator.dart';
+import 'package:pageview/services/posts/service_posts.dart';
+import 'package:pageview/services/users/service_users.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());

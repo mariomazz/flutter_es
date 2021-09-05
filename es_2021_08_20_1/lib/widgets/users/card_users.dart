@@ -1,5 +1,5 @@
-import 'package:es_2021_08_20_1/models/users/user.dart';
 import 'package:flutter/material.dart';
+import 'package:pageview/models/users/user.dart';
 
 class CardUsers extends StatelessWidget {
   final User user;

@@ -1,6 +1,8 @@
 import 'package:chopper/chopper.dart';
-import 'package:es_2021_08_20_1/models/users/user.dart';
-import 'package:es_2021_08_20_1/services/users/model_users_converter.dart';
+
+import 'package:pageview/models/users/user.dart';
+
+import 'model_users_converter.dart';
 
 
 part 'service_users.chopper.dart';

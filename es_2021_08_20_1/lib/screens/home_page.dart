@@ -1,12 +1,12 @@
 import 'package:chopper/chopper.dart';
-import 'package:es_2021_08_20_1/models/posts/post.dart';
-import 'package:es_2021_08_20_1/models/users/user.dart';
-import 'package:es_2021_08_20_1/screens/posts/posts_screen.dart';
-import 'package:es_2021_08_20_1/screens/users/users_screen.dart';
-import 'package:es_2021_08_20_1/services/posts/service_posts.dart';
-import 'package:es_2021_08_20_1/services/users/service_users.dart';
-import 'package:es_2021_08_20_1/widgets/shared/progress-indicator/progress_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:pageview/models/posts/post.dart';
+import 'package:pageview/models/users/user.dart';
+import 'package:pageview/screens/posts/posts_screen.dart';
+import 'package:pageview/screens/users/users_screen.dart';
+import 'package:pageview/services/posts/service_posts.dart';
+import 'package:pageview/services/users/service_users.dart';
+import 'package:pageview/widgets/shared/progress-indicator/progress_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 

@@ -1,5 +1,5 @@
-import 'package:es_2021_08_20_1/models/users/geo.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pageview/models/users/geo.dart';
 
 part 'address.g.dart';
 
