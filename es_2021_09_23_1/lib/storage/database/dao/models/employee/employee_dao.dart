@@ -1,4 +1,4 @@
-import 'package:es_2021_09_23_1/database/entity/entity.dart';
+import 'package:es_2021_09_23_1/models/employee/employee.dart';
 import 'package:floor/floor.dart';
 
 @dao

@@ -1,7 +1,7 @@
 import 'package:es_2021_09_23_1/configurations/routing/routing_generator.dart';
-import 'package:es_2021_09_23_1/database/dao/employee_dao.dart';
-import 'package:es_2021_09_23_1/database/database/database.dart';
 import 'package:es_2021_09_23_1/providers/database/database_provider.dart';
+import 'package:es_2021_09_23_1/storage/database/dao/models/employee/employee_dao.dart';
+import 'package:es_2021_09_23_1/storage/database/database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,13 +10,15 @@ void main() async {
   final database =
       await $FloorAppDatabase.databaseBuilder('database.db').build();
 
-  final dao = database.employeeDAO;
-  runApp(MyApp(dao: dao));
+  runApp(MyApp(database: database));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key, required this.dao}) : super(key: key);
-  final EmployeeDao dao;
+  MyApp({Key? key, required AppDatabase database}) : super(key: key) {
+    employeeDao = database.employeeDAO;
+  }
+
+  EmployeeDao? employeeDao;
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
           },
           builder: (context, __) {
             Provider.of<DatabaseProvider>(context, listen: false)
-                .setEmployeeDao(dao);
+                .setEmployeeDao(employeeDao!);
 
             return MaterialApp(
               debugShowCheckedModeBanner: false,

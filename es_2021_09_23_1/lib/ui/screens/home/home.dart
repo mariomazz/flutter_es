@@ -1,9 +1,8 @@
 import 'dart:math';
-import 'package:es_2021_09_23_1/database/dao/employee_dao.dart';
-import 'package:es_2021_09_23_1/database/entity/entity.dart';
+import 'package:es_2021_09_23_1/models/employee/employee.dart';
 import 'package:es_2021_09_23_1/providers/database/database_provider.dart';
+import 'package:es_2021_09_23_1/storage/database/dao/models/employee/employee_dao.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -43,8 +42,13 @@ class _HomePageState extends State<HomePage> {
             icon: const Icon(Icons.add),
           ),
           IconButton(
-            onPressed: () {
-              deleteAllEmployeeDB();
+            onPressed: () async {
+              bool? delete =
+                  await _showConfirmationDialog(context, 'remove all items?');
+
+              if (delete!) {
+                deleteAllEmployeeDB();
+              }
             },
             icon: const Icon(Icons.delete),
           ),
@@ -77,43 +81,50 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildListEmployee(List<Employee> employee) {
-    return ListView.builder(
-      itemBuilder: (_, i) => Dismissible(
-        background: Container(
-          color: Colors.red,
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                const Icon(Icons.delete, color: Colors.white),
-                const Text(
-                  'Move to trash',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ],
+    return RefreshIndicator(
+      onRefresh: () async {
+        setState(() {});
+      },
+      child: ListView.builder(
+        itemBuilder: (_, i) => Dismissible(
+          background: Container(
+            color: Colors.red,
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const Icon(Icons.delete, color: Colors.white),
+                  const Text(
+                    'Move to trash',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          confirmDismiss: (DismissDirection dismissDirection) async {
+            return await _showConfirmationDialog(context, 'remove this item?');
+          },
+          onDismissed: (direction) {
+            deleteSingleEmployee(employee[i].id);
+          },
+          key: UniqueKey(),
+          child: Container(
+            child: ListTile(
+              title: Text(employee[i].firstName),
+              subtitle: Text(employee[i].lastName),
+              leading: Text(employee[i].id.toString()),
+              trailing: Text(employee[i].email),
             ),
           ),
         ),
-        confirmDismiss: (DismissDirection dismissDirection) async {
-          return await _showConfirmationDialog(context);
-        },
-        onDismissed: (direction) {
-          deleteSingleEmployee(employee[i].id);
-        },
-        key: UniqueKey(),
-        child: Container(
-          child: ListTile(
-            title: Text(employee[i].firstName),
-            subtitle: Text(employee[i].lastName),
-            leading: Text(employee[i].id.toString()),
-            trailing: Text(employee[i].email),
-          ),
-        ),
+        itemCount: employee.length,
       ),
-      itemCount: employee.length,
     );
   }
+
+  //methods
 
   void deleteSingleEmployee(int id) {
     EmployeeDao employeeDAO =
@@ -156,13 +167,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future<bool?> _showConfirmationDialog(BuildContext context) {
+  Future<bool?> _showConfirmationDialog(BuildContext context, String message) {
     return showDialog<bool>(
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('remove this item?'),
+          title: Text(message),
           actions: <Widget>[
             TextButton(
               child: const Text('Yes'),
