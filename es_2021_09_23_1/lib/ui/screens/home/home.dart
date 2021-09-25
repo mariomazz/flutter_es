@@ -127,9 +127,9 @@ class _HomePageState extends State<HomePage> {
   //methods
 
   void deleteSingleEmployee(int id) {
-    EmployeeDao employeeDAO =
-        Provider.of<DatabaseProvider>(context, listen: false).getEmployeeDao;
-    employeeDAO.deleteEmployeeById(id);
+    Provider.of<DatabaseProvider>(context, listen: false)
+        .getEmployeeDao
+        .deleteEmployeeById(id);
     setState(() {});
     scaffoldMessage('elemento cancellato');
   }
