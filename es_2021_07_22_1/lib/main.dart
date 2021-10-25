@@ -1,67 +1,133 @@
+import 'dart:math';
+import 'package:es_2021_07_22_1/flappy_search_bar.dart';
+import 'package:flappy_search_bar/scaled_tile.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Home(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
+class Post {
   final String title;
+  final String body;
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  Post(this.title, this.body);
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+class _HomeState extends State<Home> {
+  final SearchBarController<Post> _searchBarController = SearchBarController();
+  bool isReplay = false;
+
+  Future<List<Post>> _getALlPosts(String text) async {
+    await Future.delayed(Duration(seconds: text.length == 4 ? 10 : 1));
+    if (isReplay) return [Post("Replaying !", "Replaying body")];
+    if (text.length == 5) throw Error();
+    if (text.length == 6) return [];
+    List<Post> posts = [];
+
+    var random = new Random();
+    for (int i = 0; i < 10; i++) {
+      posts
+          .add(Post("$text $i", "body random number : ${random.nextInt(100)}"));
+    }
+    return posts;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+      body: SafeArea(
+        child: SearchBar<Post>(
+          buildSuggestion: (_, __) => Container(),
+          onError: (error) {
+            return Container();
+          },
+          searchBarPadding: EdgeInsets.symmetric(horizontal: 10),
+          headerPadding: EdgeInsets.symmetric(horizontal: 10),
+          listPadding: EdgeInsets.symmetric(horizontal: 10),
+          onSearch: _getALlPosts,
+          searchBarController: _searchBarController,
+          placeHolder: Text("placeholder"),
+          cancellationWidget: Text("Cancel"),
+          emptyWidget: Text("empty"),
+          indexedScaledTileBuilder: (int index) =>
+              ScaledTile.count(1, index.isEven ? 2 : 1),
+          header: Row(
+            children: <Widget>[
+              TextButton(
+                child: Text("sort"),
+                onPressed: () {
+                  _searchBarController.sortList((Post a, Post b) {
+                    return a.body.compareTo(b.body);
+                  });
+                },
+              ),
+              TextButton(
+                child: Text("Desort"),
+                onPressed: () {
+                  _searchBarController.removeSort();
+                },
+              ),
+              TextButton(
+                child: Text("Replay"),
+                onPressed: () {
+                  isReplay = !isReplay;
+                  _searchBarController.replayLastSearch();
+                },
+              ),
+            ],
+          ),
+          onCancelled: () => print("Cancelled triggered"),
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          crossAxisCount: 2,
+          onItemFound: (Post post, int index) {
+            return Container(
+              color: Colors.lightBlue,
+              child: ListTile(
+                title: Text(post.title),
+                isThreeLine: true,
+                subtitle: Text(post.body),
+                onTap: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => Detail()));
+                },
+              ),
+            );
+          },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+    );
+  }
+}
+
+class Detail extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            Text("Detail"),
+          ],
+        ),
       ),
     );
   }
