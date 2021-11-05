@@ -4,8 +4,6 @@ import 'package:myapp/services/users/service_users.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-//verifica della connessione dati
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
