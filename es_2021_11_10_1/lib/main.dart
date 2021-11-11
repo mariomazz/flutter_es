@@ -1,10 +1,26 @@
+/* import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(RouterDelegate());
 
-class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
-  Map<int, Color> color = {
+class RouterDelegate extends StatefulWidget {
+  @override
+  State<RouterDelegate> createState() => _RouterDelegateState();
+}
+
+class _RouterDelegateState extends State<RouterDelegate> {
+  ValueNotifier<int> indexPage = ValueNotifier(0);
+
+  void initState() {
+    super.initState();
+  }
+
+  void dispose() {
+    super.dispose();
+  }
+
+  Map<int, Color> colors = {
     50: Color.fromRGBO(136, 14, 79, .1),
     100: Color.fromRGBO(136, 14, 79, .2),
     200: Color.fromRGBO(136, 14, 79, .3),
@@ -18,178 +34,156 @@ class MyApp extends StatelessWidget {
   };
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: MaterialColor(0xFFaed1e6, color),
+    return ValueListenableBuilder<int>(
+      builder: (BuildContext context, value, Widget? child) => MaterialApp(
+        theme: ThemeData(
+          primarySwatch: MaterialColor(0xFFaed1e6, colors),
+        ),
+        debugShowCheckedModeBanner: false,
+        title: 'Books App',
+        home: Scaffold(
+          backgroundColor: Colors.white,
+          body: Navigator(
+            pages: [
+              if (indexPage.value == 0)
+                MaterialPage(
+                  key: HomePage.valueKey,
+                  child: HomePage(
+                    navigateOnDetailScreen: (value) {
+                      if (value == 'mario') {
+                        indexPage = ValueNotifier(1);
+                      }
+                    },
+                  ),
+                )
+              else if (indexPage.value == 1)
+                MaterialPage(
+                  key: DetailPage.valueKey,
+                  child: DetailPage(),
+                )
+              else
+                MaterialPage(
+                  key: ErrorPage.valueKey,
+                  child: ErrorPage(),
+                ),
+            ],
+            onPopPage: (route, result) {
+              final MaterialPage page = route.settings as MaterialPage;
+
+              if (page.key == DetailPage.valueKey) {
+                indexPage.value = 0;
+              }
+
+              return route.isCurrent;
+            },
+          ),
+        ),
       ),
-      home: Navigator(
-        pages: [
-          MaterialPage(
-            key: ValueKey('home_page'),
-            child: HomePage2(),
-          )
-        ],
-        onPopPage: (route, result) => route.didPop(result),
-      ),
+      valueListenable: indexPage,
     );
   }
 }
 
-// navigator 2.0
-class HomePage2 extends StatelessWidget {
-  const HomePage2({Key? key}) : super(key: key);
+class HomePage extends StatelessWidget {
+  HomePage({Key? key, required this.navigateOnDetailScreen}) : super(key: key);
+
+  void Function(String value) navigateOnDetailScreen;
+
+  static const valueKey = ValueKey('home_page');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        title: InkWell(
+          child: Text('home page'),
+          onTap: () {},
+        ),
+        automaticallyImplyLeading: false,
+      ),
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text('home page'),
-        elevation: 0,
-        automaticallyImplyLeading: false,
-      ),
-      body: Center(
-        child: Text('home page'),
-      ),
-    );
-  }
-}
-
-class ProfilePage2 extends StatelessWidget {
-  const ProfilePage2({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('profile page'),
-        elevation: 0,
-        automaticallyImplyLeading: false,
-      ),
       body: Center(
         child: TextButton(
-          onPressed: () => Navigator.push(
-            context,
-            PageRouteBuilder(
-              pageBuilder: (context, _, __) => HomePage(),
-              transitionsBuilder: (
-                BuildContext context,
-                Animation<double> animation,
-                Animation<double> secondaryAnimation,
-                Widget child,
-              ) =>
-                  SlideTransition(
-                position: Tween<Offset>(
-                  begin: const Offset(-1, 0),
-                  end: const Offset(0, 0),
-                ).animate(animation),
-                child: child,
-              ),
-            ),
-          ),
-          child: Text('home page'),
+          onPressed: () {
+            navigateOnDetailScreen.call('mario');
+          },
+          child: Text('detail page'),
         ),
       ),
     );
   }
 }
 
-//navigator 2.0
-
-// navigator 1.0
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class DetailPage extends StatelessWidget {
+  const DetailPage({Key? key}) : super(key: key);
+  static const valueKey = ValueKey('detail_page');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        title: InkWell(
+          child: Text('detail page'),
+          onTap: () {},
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text('home page'),
-        elevation: 0,
-        automaticallyImplyLeading: false,
-      ),
-      body: SizedBox.expand(
-        child: GestureDetector(
-          onPanUpdate: (update) {
-            int sensitivity = 5;
-            if (update.delta.dx < -sensitivity) {
-              Navigator.push(
-                context,
-                PageRouteBuilder(
-                  pageBuilder: (context, _, __) => ProfilePage(),
-                  transitionsBuilder: (
-                    BuildContext context,
-                    Animation<double> animation,
-                    Animation<double> secondaryAnimation,
-                    Widget child,
-                  ) =>
-                      SlideTransition(
-                    position: Tween<Offset>(
-                      begin: const Offset(1, 0),
-                      end: const Offset(0, 0),
-                    ).animate(animation),
-                    child: child,
-                  ),
-                ),
-              );
-            }
-          },
-          child: TextButton(
-            onPressed: () => Navigator.push(
-              context,
-              PageRouteBuilder(
-                pageBuilder: (context, _, __) => ProfilePage(),
-                transitionsBuilder: (
-                  BuildContext context,
-                  Animation<double> animation,
-                  Animation<double> secondaryAnimation,
-                  Widget child,
-                ) =>
-                    SlideTransition(
-                  position: Tween<Offset>(
-                    begin: const Offset(1, 0),
-                    end: const Offset(0, 0),
-                  ).animate(animation),
-                  child: child,
-                ),
-              ),
-            ),
-            child: Text('profile page'),
-          ),
-        ),
-      ),
+      body: Container(),
     );
   }
 }
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class ErrorPage extends StatelessWidget {
+  const ErrorPage({Key? key}) : super(key: key);
+  static const valueKey = ValueKey('error_page');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('profile page'),
-        elevation: 0,
-        automaticallyImplyLeading: true,
+      body: Center(
+        child: Text('errore di rotta'),
       ),
-      body: SizedBox.expand(
-        child: GestureDetector(
-          onPanUpdate: (update) {
-            int sensitivity = 5;
-            if (update.delta.dx > sensitivity) {
-              Navigator.pop(context);
-            }
-          },
-          child: TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('home page'),
-          ),
-        ),
+    );
+  }
+}
+ */
+
+import 'package:es_2021_11_10_1/configurations/routing/my_router_delegate.dart';
+import 'package:es_2021_11_10_1/configurations/routing/my_route_information_parser.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  MyApp({Key? key}) : super(key: key);
+  final Map<int, Color> swatchColors = {
+    50: Color.fromRGBO(136, 14, 79, .1),
+    100: Color.fromRGBO(136, 14, 79, .2),
+    200: Color.fromRGBO(136, 14, 79, .3),
+    300: Color.fromRGBO(136, 14, 79, .4),
+    400: Color.fromRGBO(136, 14, 79, .5),
+    500: Color.fromRGBO(136, 14, 79, .6),
+    600: Color.fromRGBO(136, 14, 79, .7),
+    700: Color.fromRGBO(136, 14, 79, .8),
+    800: Color.fromRGBO(136, 14, 79, .9),
+    900: Color.fromRGBO(136, 14, 79, 1),
+  };
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      theme: ThemeData(
+        primarySwatch: MaterialColor(0xFFaed1e6, swatchColors),
       ),
+      debugShowCheckedModeBanner: false,
+      routeInformationParser: MyRouteInformationParser(),
+      routerDelegate: MyRouterDelegate(),
     );
   }
 }
