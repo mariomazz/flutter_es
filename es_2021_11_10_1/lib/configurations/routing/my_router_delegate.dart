@@ -1,4 +1,4 @@
-import 'package:es_2021_11_10_1/screens/detail_page.dart';
+import 'package:es_2021_11_10_1/screens/qrcode_page.dart';
 import 'package:es_2021_11_10_1/screens/error_page.dart';
 import 'package:es_2021_11_10_1/screens/home_page.dart';
 import 'package:flutter/material.dart';
@@ -16,22 +16,13 @@ class MyRouterDelegate extends RouterDelegate<Object> {
             MaterialPage(
               key: ValueKey('home_page'),
               child: HomePage(
-                routeDetailPage: () => indexPage.value = 1,
-                routeErrorPage: (loggedIn) {
-                  if (loggedIn) {
-                    indexPage.value = 1;
-                  } else {
-                    indexPage.value = 2;
-                  }
-                },
+                navigateToQrcopage: () => indexPage.value = 1,
               ),
             )
           else if (index == 1)
             MaterialPage(
-              key: ValueKey('detail_page'),
-              child: DetailPage(
-                routeHomePage: () => indexPage.value = 0,
-              ),
+              key: ValueKey('qrcode_page'),
+              child: QrCodePage(),
             )
           else if (index == 2)
             MaterialPage(

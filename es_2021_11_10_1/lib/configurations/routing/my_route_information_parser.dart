@@ -4,7 +4,6 @@ class MyRouteInformationParser implements RouteInformationParser<Object> {
   @override
   Future<Object> parseRouteInformation(
       RouteInformation routeInformation) async {
-    print(routeInformation.state);
     return routeInformation;
   }
 
