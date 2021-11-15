@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:auto_animated/auto_animated.dart';
 import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
 import 'package:es_2021_11_10_1/widget/info_card.dart';
@@ -23,10 +24,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   double stateBottomButtonEffect = 0;
-  TextStyle textStylePopUp = TextStyle(
-    fontSize: 22,
-    fontWeight: FontWeight.bold,
-  );
+
   @override
   void initState() {
     Future.delayed(Duration(seconds: 1), () {
@@ -38,7 +36,7 @@ class _HomePageState extends State<HomePage> {
         (widget.scanValue != '' && widget.scanValue != null)) {
       WidgetsBinding.instance!
           .addPostFrameCallback((_) => Navigator.of(context).push(
-                PopUp(bodyPopUp: _bodyPopUp()),
+                PopUp(bodyPopUp: PopUpBody(scanValue: widget.scanValue)),
               ));
     } else {}
     super.initState();
@@ -46,8 +44,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var queryData = MediaQuery.of(context);
-
     return Container(
       color: Theme.of(context).primaryColor,
       child: SafeArea(
@@ -163,10 +159,11 @@ class _HomePageState extends State<HomePage> {
                                           child: Text(
                                             'Pt',
                                             style: TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold,
-                                                color: Theme.of(context)
-                                                    .secondaryHeaderColor),
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .secondaryHeaderColor,
+                                            ),
                                           ),
                                         ),
                                       ]),
@@ -207,8 +204,27 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+}
 
-  Widget _bodyPopUp() {
+class PopUpBody extends StatefulWidget {
+  PopUpBody({Key? key, this.scanValue = ''}) : super(key: key);
+  String? scanValue;
+
+  @override
+  _PopUpBodyState createState() => _PopUpBodyState();
+}
+
+class _PopUpBodyState extends State<PopUpBody> {
+  TextEditingController _textFildController = TextEditingController();
+  int incrementValue = 0;
+  Color colorRed = Color(0xFFee6055);
+  int stateSegmentedControl = 1;
+  TextStyle textStylePopUp = TextStyle(
+    fontSize: 22,
+    fontWeight: FontWeight.bold,
+  );
+  @override
+  Widget build(BuildContext context) {
     var dataLayout = MediaQuery.of(context);
     return Center(
       child: Stack(
@@ -254,10 +270,19 @@ class _HomePageState extends State<HomePage> {
                               width: 280 / 428 * dataLayout.size.width,
                               height: 60 / 926 * dataLayout.size.height,
                               child: TextField(
+                                controller: _textFildController,
                                 maxLength: 4,
                                 textAlign: TextAlign.center,
                                 textAlignVertical: TextAlignVertical.center,
                                 style: TextStyle(fontSize: 30),
+                                onChanged: (value) {
+                                  if (value == '') {
+                                    setState(() => incrementValue = 0);
+                                  } else {
+                                    setState(() =>
+                                        incrementValue = int.parse(value));
+                                  }
+                                },
                                 decoration: InputDecoration(
                                   counterText: "",
                                   contentPadding: EdgeInsets.zero,
@@ -285,7 +310,11 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Row(mainAxisSize: MainAxisSize.min, children: [
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  setState(() => incrementValue += 5);
+                                  _textFildController.value = TextEditingValue(
+                                      text: incrementValue.toString());
+                                },
                                 child: Container(
                                     height: 60 / 926 * dataLayout.size.height,
                                     width: 60 / 428 * dataLayout.size.width,
@@ -308,7 +337,11 @@ class _HomePageState extends State<HomePage> {
                                 width: 15 / 428 * dataLayout.size.width,
                               ),
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  setState(() => incrementValue += 10);
+                                  _textFildController.value = TextEditingValue(
+                                      text: incrementValue.toString());
+                                },
                                 child: Container(
                                     height: 60 / 926 * dataLayout.size.height,
                                     width: 60 / 428 * dataLayout.size.width,
@@ -331,46 +364,58 @@ class _HomePageState extends State<HomePage> {
                                 width: 15 / 428 * dataLayout.size.width,
                               ),
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  setState(() => incrementValue += 15);
+                                  _textFildController.value = TextEditingValue(
+                                      text: incrementValue.toString());
+                                },
                                 child: Container(
-                                    height: 60 / 926 * dataLayout.size.height,
-                                    width: 60 / 428 * dataLayout.size.width,
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context)
-                                          .secondaryHeaderColor
-                                          .withOpacity(0.75),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(30),
+                                  height: 60 / 926 * dataLayout.size.height,
+                                  width: 60 / 428 * dataLayout.size.width,
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context)
+                                        .secondaryHeaderColor
+                                        .withOpacity(0.75),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      '15',
+                                      style: TextStyle(
+                                        fontSize: 35,
+                                        color: Colors.white,
                                       ),
                                     ),
-                                    child: Center(
-                                      child: Text('15',
-                                          style: TextStyle(
-                                              fontSize: 35,
-                                              color: Colors.white)),
-                                    )),
+                                  ),
+                                ),
                               ),
                               SizedBox(
                                 width: 15 / 428 * dataLayout.size.width,
                               ),
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  setState(() => incrementValue += 20);
+                                  _textFildController.value = TextEditingValue(
+                                      text: incrementValue.toString());
+                                },
                                 child: Container(
-                                    height: 60 / 926 * dataLayout.size.height,
-                                    width: 60 / 428 * dataLayout.size.width,
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context)
-                                          .secondaryHeaderColor,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(30),
-                                      ),
+                                  height: 60 / 926 * dataLayout.size.height,
+                                  width: 60 / 428 * dataLayout.size.width,
+                                  decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).secondaryHeaderColor,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
                                     ),
-                                    child: Center(
-                                      child: Text('20',
-                                          style: TextStyle(
-                                              fontSize: 35,
-                                              color: Colors.white)),
-                                    )),
+                                  ),
+                                  child: Center(
+                                    child: Text('20',
+                                        style: TextStyle(
+                                            fontSize: 35, color: Colors.white)),
+                                  ),
+                                ),
                               ),
                             ]),
                             SizedBox(
@@ -379,8 +424,11 @@ class _HomePageState extends State<HomePage> {
                             CustomSlidingSegmentedControl<int>(
                               backgroundColor:
                                   Color(0XFFC2C2C2).withOpacity(0.5),
-                              thumbColor:
-                                  Theme.of(context).secondaryHeaderColor,
+                              thumbColor: stateSegmentedControl == 0
+                                  ? colorRed
+                                  : Theme.of(context).secondaryHeaderColor,
+                              /* thumbColor: colorRed, */
+                              initialValue: stateSegmentedControl,
                               children: {
                                 0: Container(
                                   width: 80 / 428 * dataLayout.size.width,
@@ -399,7 +447,10 @@ class _HomePageState extends State<HomePage> {
                               duration: Duration(milliseconds: 200),
                               radius: 30.0,
                               onValueChanged: (index) {
-                                print(index);
+                                setState(() {
+                                  stateSegmentedControl = index;
+                                  log(stateSegmentedControl.toString());
+                                });
                               },
                             ),
                           ],
