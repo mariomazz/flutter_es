@@ -206,6 +206,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+// ignore: must_be_immutable
 class PopUpBody extends StatefulWidget {
   PopUpBody({Key? key, this.scanValue = ''}) : super(key: key);
   String? scanValue;
@@ -270,6 +271,7 @@ class _PopUpBodyState extends State<PopUpBody> {
                               width: 280 / 428 * dataLayout.size.width,
                               height: 60 / 926 * dataLayout.size.height,
                               child: TextField(
+                                keyboardType: TextInputType.number,
                                 controller: _textFildController,
                                 maxLength: 4,
                                 textAlign: TextAlign.center,
@@ -311,7 +313,13 @@ class _PopUpBodyState extends State<PopUpBody> {
                             Row(mainAxisSize: MainAxisSize.min, children: [
                               InkWell(
                                 onTap: () {
-                                  setState(() => incrementValue += 5);
+                                  setState(() {
+                                    if (stateSegmentedControl == 0) {
+                                      incrementValue -= 5;
+                                    } else {
+                                      incrementValue += 5;
+                                    }
+                                  });
                                   _textFildController.value = TextEditingValue(
                                       text: incrementValue.toString());
                                 },
@@ -338,34 +346,46 @@ class _PopUpBodyState extends State<PopUpBody> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  setState(() => incrementValue += 10);
+                                  setState(() {
+                                    if (stateSegmentedControl == 0) {
+                                      incrementValue -= 10;
+                                    } else {
+                                      incrementValue += 10;
+                                    }
+                                  });
                                   _textFildController.value = TextEditingValue(
                                       text: incrementValue.toString());
                                 },
                                 child: Container(
-                                    height: 60 / 926 * dataLayout.size.height,
-                                    width: 60 / 428 * dataLayout.size.width,
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context)
-                                          .secondaryHeaderColor
-                                          .withOpacity(0.50),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(30),
-                                      ),
+                                  height: 60 / 926 * dataLayout.size.height,
+                                  width: 60 / 428 * dataLayout.size.width,
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context)
+                                        .secondaryHeaderColor
+                                        .withOpacity(0.50),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
                                     ),
-                                    child: Center(
-                                      child: Text('10',
-                                          style: TextStyle(
-                                              fontSize: 35,
-                                              color: Colors.white)),
-                                    )),
+                                  ),
+                                  child: Center(
+                                    child: Text('10',
+                                        style: TextStyle(
+                                            fontSize: 35, color: Colors.white)),
+                                  ),
+                                ),
                               ),
                               SizedBox(
                                 width: 15 / 428 * dataLayout.size.width,
                               ),
                               InkWell(
                                 onTap: () {
-                                  setState(() => incrementValue += 15);
+                                  setState(() {
+                                    if (stateSegmentedControl == 0) {
+                                      incrementValue -= 15;
+                                    } else {
+                                      incrementValue += 15;
+                                    }
+                                  });
                                   _textFildController.value = TextEditingValue(
                                       text: incrementValue.toString());
                                 },
@@ -396,7 +416,13 @@ class _PopUpBodyState extends State<PopUpBody> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  setState(() => incrementValue += 20);
+                                  setState(() {
+                                    if (stateSegmentedControl == 0) {
+                                      incrementValue -= 20;
+                                    } else {
+                                      incrementValue += 20;
+                                    }
+                                  });
                                   _textFildController.value = TextEditingValue(
                                       text: incrementValue.toString());
                                 },
@@ -449,7 +475,6 @@ class _PopUpBodyState extends State<PopUpBody> {
                               onValueChanged: (index) {
                                 setState(() {
                                   stateSegmentedControl = index;
-                                  log(stateSegmentedControl.toString());
                                 });
                               },
                             ),

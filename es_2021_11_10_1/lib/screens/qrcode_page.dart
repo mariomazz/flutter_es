@@ -34,7 +34,7 @@ class _QrCodePageState extends State<QrCodePage> {
 
   void initState() {
     scanQRCode().then((value) {
-      if (value != null && value != ''/* &&  value != '-1' */) {
+      if (value != null && value != '' && value != '-1') {
         log(value);
         qrCode = value;
         widget.navigateToHomePage.call(scanValue: qrCode!, popUpValue: true);
