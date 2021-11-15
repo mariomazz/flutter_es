@@ -1,7 +1,6 @@
 import 'package:auto_animated/auto_animated.dart';
 import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
 import 'package:es_2021_11_10_1/widget/info_card.dart';
-import 'package:es_2021_11_10_1/widget/pop_up.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

@@ -22,7 +22,9 @@ class MyRouterDelegate extends RouterDelegate<Object> {
           else if (index == 1)
             MaterialPage(
               key: ValueKey('qrcode_page'),
-              child: QrCodePage(),
+              child: QrCodePage(
+                navigateToHomePage: (String scanValue) => indexPage.value = 0,
+              ),
             )
           else if (index == 2)
             MaterialPage(
