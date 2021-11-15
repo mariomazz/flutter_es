@@ -26,13 +26,6 @@ class MyRouterDelegate extends RouterDelegate<Object> {
                 navigateToHomePage: (String scanValue) => indexPage.value = 0,
               ),
             )
-          else if (index == 2)
-            MaterialPage(
-              key: ValueKey('error_page'),
-              child: ErrorPage(
-                returnHomePage: () => indexPage.value = 0,
-              ),
-            )
           else
             MaterialPage(
               key: ValueKey('error_page'),
