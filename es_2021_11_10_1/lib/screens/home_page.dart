@@ -313,12 +313,12 @@ class _PopUpBodyState extends State<PopUpBody> {
                               InkWell(
                                 onTap: () {
                                   setState(() {
-                                    if (stateSegmentedControl == 0) {
+                                    /*   if (stateSegmentedControl == 0) {
                                       incrementValue -= 5;
                                     } else {
                                       incrementValue += 5;
-                                    }
-                                    /* incrementValue += 5; */
+                                    } */
+                                    incrementValue += 5;
                                   });
                                   _textFildController.value = TextEditingValue(
                                       text: incrementValue.toString());
@@ -347,12 +347,12 @@ class _PopUpBodyState extends State<PopUpBody> {
                               InkWell(
                                 onTap: () {
                                   setState(() {
-                                    if (stateSegmentedControl == 0) {
+                                    /*   if (stateSegmentedControl == 0) {
                                       incrementValue -= 10;
                                     } else {
                                       incrementValue += 10;
-                                    }
-                                    /* incrementValue += 10; */
+                                    } */
+                                    incrementValue += 10;
                                   });
                                   _textFildController.value = TextEditingValue(
                                       text: incrementValue.toString());
@@ -381,12 +381,12 @@ class _PopUpBodyState extends State<PopUpBody> {
                               InkWell(
                                 onTap: () {
                                   setState(() {
-                                    if (stateSegmentedControl == 0) {
+                                    /*    if (stateSegmentedControl == 0) {
                                       incrementValue -= 15;
                                     } else {
                                       incrementValue += 15;
-                                    }
-                                    /* incrementValue += 15; */
+                                    } */
+                                    incrementValue += 15;
                                   });
                                   _textFildController.value = TextEditingValue(
                                       text: incrementValue.toString());
@@ -419,12 +419,12 @@ class _PopUpBodyState extends State<PopUpBody> {
                               InkWell(
                                 onTap: () {
                                   setState(() {
-                                    if (stateSegmentedControl == 0) {
+                                    /*  if (stateSegmentedControl == 0) {
                                       incrementValue -= 20;
                                     } else {
                                       incrementValue += 20;
-                                    }
-                                    /* incrementValue += 20; */
+                                    } */
+                                    incrementValue += 20;
                                   });
                                   _textFildController.value = TextEditingValue(
                                       text: incrementValue.toString());
@@ -478,13 +478,13 @@ class _PopUpBodyState extends State<PopUpBody> {
                               onValueChanged: (index) {
                                 setState(() {
                                   stateSegmentedControl = index;
-                                  if (stateSegmentedControl == 0) {
+                                  /* if (stateSegmentedControl == 0) {
                                     incrementValue = -incrementValue;
                                   } else {
                                     incrementValue = incrementValue.abs();
-                                  }
-                                  _textFildController.value = TextEditingValue(
-                                      text: incrementValue.toString());
+                                  } */
+                                 /*  _textFildController.value = TextEditingValue(
+                                      text: incrementValue.toString()); */
                                 });
                               },
                             ),
