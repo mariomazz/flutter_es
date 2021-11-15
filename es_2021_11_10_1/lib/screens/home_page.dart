@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:auto_animated/auto_animated.dart';
 import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
 import 'package:es_2021_11_10_1/widget/info_card.dart';
@@ -319,27 +318,28 @@ class _PopUpBodyState extends State<PopUpBody> {
                                     } else {
                                       incrementValue += 5;
                                     }
+                                    /* incrementValue += 5; */
                                   });
                                   _textFildController.value = TextEditingValue(
                                       text: incrementValue.toString());
                                 },
                                 child: Container(
-                                    height: 60 / 926 * dataLayout.size.height,
-                                    width: 60 / 428 * dataLayout.size.width,
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context)
-                                          .secondaryHeaderColor
-                                          .withOpacity(0.25),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(30),
-                                      ),
+                                  height: 60 / 926 * dataLayout.size.height,
+                                  width: 60 / 428 * dataLayout.size.width,
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context)
+                                        .secondaryHeaderColor
+                                        .withOpacity(0.25),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
                                     ),
-                                    child: Center(
-                                      child: Text('5',
-                                          style: TextStyle(
-                                              fontSize: 35,
-                                              color: Colors.white)),
-                                    )),
+                                  ),
+                                  child: Center(
+                                    child: Text('5',
+                                        style: TextStyle(
+                                            fontSize: 35, color: Colors.white)),
+                                  ),
+                                ),
                               ),
                               SizedBox(
                                 width: 15 / 428 * dataLayout.size.width,
@@ -352,6 +352,7 @@ class _PopUpBodyState extends State<PopUpBody> {
                                     } else {
                                       incrementValue += 10;
                                     }
+                                    /* incrementValue += 10; */
                                   });
                                   _textFildController.value = TextEditingValue(
                                       text: incrementValue.toString());
@@ -385,6 +386,7 @@ class _PopUpBodyState extends State<PopUpBody> {
                                     } else {
                                       incrementValue += 15;
                                     }
+                                    /* incrementValue += 15; */
                                   });
                                   _textFildController.value = TextEditingValue(
                                       text: incrementValue.toString());
@@ -422,6 +424,7 @@ class _PopUpBodyState extends State<PopUpBody> {
                                     } else {
                                       incrementValue += 20;
                                     }
+                                    /* incrementValue += 20; */
                                   });
                                   _textFildController.value = TextEditingValue(
                                       text: incrementValue.toString());
@@ -475,6 +478,13 @@ class _PopUpBodyState extends State<PopUpBody> {
                               onValueChanged: (index) {
                                 setState(() {
                                   stateSegmentedControl = index;
+                                  if (stateSegmentedControl == 0) {
+                                    incrementValue = -incrementValue;
+                                  } else {
+                                    incrementValue = incrementValue.abs();
+                                  }
+                                  _textFildController.value = TextEditingValue(
+                                      text: incrementValue.toString());
                                 });
                               },
                             ),
