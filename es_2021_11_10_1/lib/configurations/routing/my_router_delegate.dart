@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 
 class MyRouterDelegate extends RouterDelegate<Object> {
   ValueNotifier<int> indexPage = ValueNotifier<int>(0);
-
+  bool popUpValue = false;
+  String scanValue = '';
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<int>(
@@ -16,6 +17,8 @@ class MyRouterDelegate extends RouterDelegate<Object> {
             MaterialPage(
               key: ValueKey('home_page'),
               child: HomePage(
+                popUpValue: popUpValue,
+                scanValue: scanValue,
                 navigateToQrcopage: () => indexPage.value = 1,
               ),
             )
@@ -23,8 +26,16 @@ class MyRouterDelegate extends RouterDelegate<Object> {
             MaterialPage(
               key: ValueKey('qrcode_page'),
               child: QrCodePage(
-                navigateToHomePage: (String scanValue) => indexPage.value = 0,
-              ),
+                  navigateToHomePage: ({bool? popUpValue, String? scanValue}) {
+                if (popUpValue != null) {
+                  this.popUpValue = popUpValue;
+                }
+                if (scanValue != null) {
+                  this.scanValue = scanValue;
+                }
+
+                indexPage.value = 0;
+              }),
             )
           else
             MaterialPage(

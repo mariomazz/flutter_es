@@ -41,65 +41,7 @@ class PopUp extends ModalRoute<void> {
 
   Widget _buildOverlayContent(BuildContext context) {
     final dataLayout = MediaQuery.of(context);
-    return Center(
-      child: Stack(children: [
-        Padding(
-          padding: const EdgeInsets.all(32.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(
-                Radius.circular(
-                  40 / 375 * dataLayout.size.width,
-                ),
-              ),
-              border: Border.all(
-                width: 2,
-                color: Theme.of(context).secondaryHeaderColor,
-              ),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                bodyPopUp,
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text(
-                    'Conferma',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                SizedBox(
-                  height: 35,
-                )
-              ],
-            ),
-          ),
-        ),
-      Positioned(
-        top: 22,
-        right: 90,
-        child: Container(   decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(
-                Radius.circular(
-                  40 / 375 * dataLayout.size.width,
-                ),
-              ),
-              border: Border.all(
-                width: 2,
-                color: Theme.of(context).secondaryHeaderColor,
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal:8),
-              child: Text('#125846' , style:TextStyle( fontSize:20 , fontWeight:FontWeight.bold , color: Theme.of(context).secondaryHeaderColor)),
-            ),),
-      ),
-      
-
-      ]),
-    );
+    return bodyPopUp;
   }
 
   @override

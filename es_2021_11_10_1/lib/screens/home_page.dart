@@ -1,13 +1,21 @@
 import 'package:auto_animated/auto_animated.dart';
 import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
 import 'package:es_2021_11_10_1/widget/info_card.dart';
+import 'package:es_2021_11_10_1/widget/pop_up.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
-  HomePage({Key? key, required this.navigateToQrcopage}) : super(key: key);
+  HomePage(
+      {Key? key,
+      required this.navigateToQrcopage,
+      this.popUpValue = false,
+      this.scanValue})
+      : super(key: key);
   VoidCallback navigateToQrcopage;
+  bool popUpValue;
+  String? scanValue;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -19,7 +27,6 @@ class _HomePageState extends State<HomePage> {
     fontSize: 22,
     fontWeight: FontWeight.bold,
   );
-
   @override
   void initState() {
     Future.delayed(Duration(seconds: 1), () {
@@ -27,12 +34,19 @@ class _HomePageState extends State<HomePage> {
         stateBottomButtonEffect = 1;
       });
     });
+    if (widget.popUpValue &&
+        (widget.scanValue != '' && widget.scanValue != null)) {
+      WidgetsBinding.instance!
+          .addPostFrameCallback((_) => Navigator.of(context).push(
+                PopUp(bodyPopUp: _bodyPopUp()),
+              ));
+    } else {}
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-        var queryData = MediaQuery.of(context);
+    var queryData = MediaQuery.of(context);
 
     return Container(
       color: Theme.of(context).primaryColor,
@@ -59,8 +73,8 @@ class _HomePageState extends State<HomePage> {
                       InkWell(
                         onTap: () {},
                         child: Container(
-                          width: 42/  428 * queryData.size.width,
-                          height: 42/ 926 * queryData.size.height,
+                          width: 42,
+                          height: 42 ,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.all(
@@ -76,9 +90,11 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                           padding: EdgeInsets.all(10),
-                          child: Icon(
-                            Icons.logout_outlined,
-                            color: Theme.of(context).secondaryHeaderColor,
+                          child: Center(
+                            child: Icon(
+                              Icons.logout_outlined,
+                              color: Theme.of(context).secondaryHeaderColor,
+                            ),
                           ),
                         ),
                       ),
@@ -192,164 +208,248 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget bodyPopUpData() {
-            var queryData = MediaQuery.of(context);
-
-    return Padding(
-      padding: const EdgeInsets.all(18.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Text(
-                  'Inserisci il numero di punti',
-                  style: textStylePopUp,
+  Widget _bodyPopUp() {
+    var dataLayout = MediaQuery.of(context);
+    return Center(
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(
+                    40 / 375 * dataLayout.size.width,
+                  ),
+                ),
+                border: Border.all(
+                  width: 2,
+                  color: Theme.of(context).secondaryHeaderColor,
                 ),
               ),
-              Container(
-                width: 280 / 428 * queryData.size.width,
-                height: 60 / 926 * queryData.size.height,
-                child: TextField(
-                  maxLength: 4,
-                  textAlign: TextAlign.center,
-                  textAlignVertical: TextAlignVertical.center,
-                  style: TextStyle(fontSize: 30),
-                  decoration: InputDecoration(
-                    counterText: "",
-                    contentPadding: EdgeInsets.zero,
-                    hintText: "10",
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide(
-                        color: Theme.of(context).primaryColor,
-                        width: 1.0,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
                       ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide(
-                        color: Theme.of(context).secondaryHeaderColor,
-                        width: 2.0,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Text(
+                                'Inserisci il numero di punti',
+                                style: textStylePopUp,
+                              ),
+                            ),
+                            Container(
+                              width: 280 / 428 * dataLayout.size.width,
+                              height: 60 / 926 * dataLayout.size.height,
+                              child: TextField(
+                                maxLength: 4,
+                                textAlign: TextAlign.center,
+                                textAlignVertical: TextAlignVertical.center,
+                                style: TextStyle(fontSize: 30),
+                                decoration: InputDecoration(
+                                  counterText: "",
+                                  contentPadding: EdgeInsets.zero,
+                                  hintText: "10",
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                    borderSide: BorderSide(
+                                      color: Theme.of(context).primaryColor,
+                                      width: 1.0,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                    borderSide: BorderSide(
+                                      color: Theme.of(context)
+                                          .secondaryHeaderColor,
+                                      width: 2.0,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20 / 926 * dataLayout.size.height,
+                            ),
+                            Row(mainAxisSize: MainAxisSize.min, children: [
+                              InkWell(
+                                onTap: () {},
+                                child: Container(
+                                    height: 60 / 926 * dataLayout.size.height,
+                                    width: 60 / 428 * dataLayout.size.width,
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .secondaryHeaderColor
+                                          .withOpacity(0.25),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(30),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text('5',
+                                          style: TextStyle(
+                                              fontSize: 35,
+                                              color: Colors.white)),
+                                    )),
+                              ),
+                              SizedBox(
+                                width: 15 / 428 * dataLayout.size.width,
+                              ),
+                              InkWell(
+                                onTap: () {},
+                                child: Container(
+                                    height: 60 / 926 * dataLayout.size.height,
+                                    width: 60 / 428 * dataLayout.size.width,
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .secondaryHeaderColor
+                                          .withOpacity(0.50),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(30),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text('10',
+                                          style: TextStyle(
+                                              fontSize: 35,
+                                              color: Colors.white)),
+                                    )),
+                              ),
+                              SizedBox(
+                                width: 15 / 428 * dataLayout.size.width,
+                              ),
+                              InkWell(
+                                onTap: () {},
+                                child: Container(
+                                    height: 60 / 926 * dataLayout.size.height,
+                                    width: 60 / 428 * dataLayout.size.width,
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .secondaryHeaderColor
+                                          .withOpacity(0.75),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(30),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text('15',
+                                          style: TextStyle(
+                                              fontSize: 35,
+                                              color: Colors.white)),
+                                    )),
+                              ),
+                              SizedBox(
+                                width: 15 / 428 * dataLayout.size.width,
+                              ),
+                              InkWell(
+                                onTap: () {},
+                                child: Container(
+                                    height: 60 / 926 * dataLayout.size.height,
+                                    width: 60 / 428 * dataLayout.size.width,
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .secondaryHeaderColor,
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(30),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text('20',
+                                          style: TextStyle(
+                                              fontSize: 35,
+                                              color: Colors.white)),
+                                    )),
+                              ),
+                            ]),
+                            SizedBox(
+                              height: 50 / 926 * dataLayout.size.height,
+                            ),
+                            CustomSlidingSegmentedControl<int>(
+                              backgroundColor:
+                                  Color(0XFFC2C2C2).withOpacity(0.5),
+                              thumbColor:
+                                  Theme.of(context).secondaryHeaderColor,
+                              children: {
+                                0: Container(
+                                  width: 80 / 428 * dataLayout.size.width,
+                                  child: Center(
+                                    child:
+                                        Icon(Icons.remove, color: Colors.white),
+                                  ),
+                                ),
+                                1: Container(
+                                  width: 80 / 428 * dataLayout.size.width,
+                                  child: Center(
+                                    child: Icon(Icons.add, color: Colors.white),
+                                  ),
+                                ),
+                              },
+                              duration: Duration(milliseconds: 200),
+                              radius: 30.0,
+                              onValueChanged: (index) {
+                                print(index);
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-              SizedBox(height: 20  / 926 * queryData.size.height,),
-              Row(mainAxisSize: MainAxisSize.min, children: [
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                      height: 60 /  926 * queryData.size.height,
-                      width: 60  /428 * queryData.size.width,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context)
-                            .secondaryHeaderColor
-                            .withOpacity(0.25),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(30),
-                        ),
-                      ),
-                      child: Center(
-                        child: Text('5',
-                            style:
-                                TextStyle(fontSize: 35, color: Colors.white)),
-                      )),
-                ),
-                SizedBox(width: 15 / 428 * queryData.size.width,),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                      height: 60/ 926 * queryData.size.height,
-                      width: 60 / 428 * queryData.size.width,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context)
-                            .secondaryHeaderColor
-                            .withOpacity(0.50),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(30),
-                        ),
-                      ),
-                      child: Center(
-                        child: Text('10',
-                            style:
-                                TextStyle(fontSize: 35, color: Colors.white)),
-                      )),
-                ),
-                SizedBox(width: 15/ 428 * queryData.size.width,),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                      height: 60/926*queryData.size.height,
-                      width: 60/ 428 * queryData.size.width,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context)
-                            .secondaryHeaderColor
-                            .withOpacity(0.75),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(30),
-                        ),
-                      ),
-                      child: Center(
-                        child: Text('15',
-                            style:
-                                TextStyle(fontSize: 35, color: Colors.white)),
-                      )),
-                ),
-                SizedBox(width: 15/ 428 * queryData.size.width,),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                      height: 60/  926 * queryData.size.height,
-                      width: 60/ 428 * queryData.size.width,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).secondaryHeaderColor,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(30),
-                        ),
-                      ),
-                      child: Center(
-                        child: Text('20',
-                            style:
-                                TextStyle(fontSize: 35, color: Colors.white)),
-                      )),
-                ),
-              ]),
-              SizedBox(height: 50/ 926 * queryData.size.height,),
-              CustomSlidingSegmentedControl<int>(
-                backgroundColor: Color(0XFFC2C2C2).withOpacity(0.5),
-                thumbColor: Theme.of(context).secondaryHeaderColor,
-                children: {
-                  0: Container(
-                    width: 80/428 * queryData.size.width,
-                    child: Center(
-                      child: Icon(Icons.remove, color: Colors.white),
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(
+                      'Conferma',
+                      style: TextStyle(fontSize: 20),
                     ),
                   ),
-                  1: Container(
-                    width: 80/  428 * queryData.size.width,
-                    child: Center(
-                      child: Icon(Icons.add, color: Colors.white),
-                    ),
-                  ),
-                },
-                duration: Duration(milliseconds: 200),
-                radius: 30.0,
-                onValueChanged: (index) {
-                  print(index);
-                },
+                  SizedBox(
+                    height: 35,
+                  )
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+          Positioned(
+            top: 22,
+            right: 90,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(
+                    40 / 375 * dataLayout.size.width,
+                  ),
+                ),
+                border: Border.all(
+                  width: 2,
+                  color: Theme.of(context).secondaryHeaderColor,
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Text(
+                  widget.scanValue ?? 'errore',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).secondaryHeaderColor),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

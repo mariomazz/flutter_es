@@ -22,6 +22,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      builder: (BuildContext? context, Widget? child) => MediaQuery(
+        data: MediaQuery.of(context!).copyWith(
+          textScaleFactor:
+              MediaQuery.of(context).textScaleFactor.clamp(1.0, 1.5),
+        ),
+        child: child!,
+      ),
       theme: ThemeData(
         primarySwatch: MaterialColor(0xFF569D87, swatchColors),
         primaryColor: Color(0xFFC1DFC8),
