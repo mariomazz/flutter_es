@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 // ignore: must_be_immutable
@@ -27,8 +26,9 @@ class _QrCodePageState extends State<QrCodePage> {
       );
 
       return qrCode;
-    } on PlatformException {
-      qrCode = 'Failed to get platform version.';
+    } catch (e) {
+      log(e.toString());
+      widget.navigateToHomePage.call(popUpValue: false);
     }
   }
 
@@ -53,7 +53,7 @@ class _QrCodePageState extends State<QrCodePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                '$qrCode',
+                'Error qrCode scan',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

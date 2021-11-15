@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
-  HomePage(
-      {Key? key,
-      required this.navigateToQrcopage,
-      this.popUpValue = false,
-      this.scanValue})
-      : super(key: key);
+  HomePage({
+    Key? key,
+    required this.navigateToQrcopage,
+    this.popUpValue = false,
+    this.scanValue,
+  }) : super(key: key);
   VoidCallback navigateToQrcopage;
   bool popUpValue;
   String? scanValue;
@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                         onTap: () {},
                         child: Container(
                           width: 42,
-                          height: 42 ,
+                          height: 42,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.all(
