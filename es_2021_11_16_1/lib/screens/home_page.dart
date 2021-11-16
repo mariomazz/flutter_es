@@ -1,8 +1,10 @@
 import 'package:es_2021_11_16_1/configurations/models/pages/pages.dart';
+import 'package:es_2021_11_16_1/configurations/providers/authentication/authentication_provider.dart';
 import 'package:es_2021_11_16_1/configurations/routing/navigator.dart';
 import 'package:es_2021_11_16_1/widgets/custom_safe_area.dart';
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -14,7 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Widget createPage(BuildContext context, int index) {
+  Widget createBody(BuildContext context, int index) {
     final List<Widget> pages = [
       Center(
         child: InkWell(
@@ -39,7 +41,7 @@ class _HomePageState extends State<HomePage> {
       page: Scaffold(
         extendBody: true,
         backgroundColor: Colors.white,
-        body: createPage(context, index),
+        body: createBody(context, index),
         bottomNavigationBar: FluidNavBar(
           defaultIndex: index,
           style: FluidNavBarStyle(
@@ -58,6 +60,15 @@ class _HomePageState extends State<HomePage> {
               this.index = index;
             });
           },
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+        floatingActionButton: IconButton(
+          icon: Icon(
+            Icons.logout,
+            size: 35.0,
+          ),
+          onPressed: () =>
+              Provider.of<AuthProvider>(context, listen: false).setAuth = false,
         ),
       ),
     );
