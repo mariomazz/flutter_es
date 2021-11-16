@@ -13,5 +13,5 @@ class NavigatorProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  MyPage get getPage => MyPage(page: page, data: navigationData);
+  MyPageModel get getPage => MyPageModel(page: page, data: navigationData);
 }

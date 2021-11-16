@@ -2,50 +2,53 @@ import 'package:es_2021_11_16_1/configurations/models/page/page.dart';
 import 'package:es_2021_11_16_1/configurations/models/pages/pages.dart';
 import 'package:es_2021_11_16_1/configurations/providers/authentication/authentication_provider.dart';
 import 'package:es_2021_11_16_1/configurations/providers/navigations/navigation_provider.dart';
-import 'package:es_2021_11_16_1/screens/detail_detail.dart';
+import 'package:es_2021_11_16_1/screens/detail_detail_page.dart';
 import 'package:es_2021_11_16_1/screens/detail_page.dart';
 import 'package:es_2021_11_16_1/screens/error_page.dart';
 import 'package:es_2021_11_16_1/screens/home_page.dart';
-import 'package:es_2021_11_16_1/screens/not_logged.dart';
+import 'package:es_2021_11_16_1/widgets/my_material_page.dart';
+import 'package:es_2021_11_16_1/screens/not_logged_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MyRouterDelegate extends RouterDelegate<Object> {
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
   @override
   Widget build(BuildContext context) {
     return Consumer2<NavigatorProvider, AuthProvider>(
       builder: (context, navigationDataProvider, authDataProvider, _) {
         final bool isAuth = authDataProvider.isAuth;
-        final MyPage currentPage = navigationDataProvider.getPage;
+        final MyPageModel currentPage = navigationDataProvider.getPage;
 
         return Navigator(
           pages: [
             if (isAuth)
               if (currentPage.page == Pages.HOME)
-                MaterialPage(
+                MyMaterialPage(
                   key: HomePage.keyPage,
                   child: HomePage(),
                 )
               else if (currentPage.page == Pages.DETAIL)
-                MaterialPage(
+                MyMaterialPage(
                   key: DetailPage.keyPage,
                   child: DetailPage(),
                 )
               else if (currentPage.page == Pages.DETAIL_DETAIL)
-                MaterialPage(
+                MyMaterialPage(
                   key: DetailDetailPage.keyPage,
                   child: DetailDetailPage(),
                 )
               else
-                MaterialPage(
+                MyMaterialPage(
                   key: ErrorPage.keyPage,
                   child: ErrorPage(),
                 )
             else
-              MaterialPage(
+              MyMaterialPage(
                 key: NotLoggedPage.keyPage,
                 child: NotLoggedPage(),
-              )
+              ),
           ],
           onPopPage: (route, result) {
             return route.didPop(result);
