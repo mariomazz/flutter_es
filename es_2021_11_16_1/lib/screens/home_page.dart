@@ -1,5 +1,6 @@
 import 'package:es_2021_11_16_1/configurations/models/pages/pages.dart';
 import 'package:es_2021_11_16_1/configurations/providers/authentication/authentication_provider.dart';
+import 'package:es_2021_11_16_1/configurations/providers/state_bav_bar/state_nav_bar_provider.dart';
 import 'package:es_2021_11_16_1/configurations/routing/navigator.dart';
 import 'package:es_2021_11_16_1/widgets/custom_safe_area.dart';
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
@@ -16,32 +17,41 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Widget createBody(BuildContext context, int index) {
-    final List<Widget> pages = [
-      Center(
-        child: InkWell(
-          onTap: () => MyNavigator.navigateTo(context, Pages.DETAIL),
-          child: Text('detail page'),
-        ),
-      ),
-      Center(
-        child: InkWell(
-          onTap: () => MyNavigator.navigateTo(context, Pages.DETAIL_DETAIL),
-          child: Text('detail detail page'),
-        ),
-      )
-    ];
-    return pages[index];
+  int index = 0;
+  @override
+  void initState() {
+    index = Provider.of<StateNavBarProvider>(context, listen: false).getIndex;
+
+    super.initState();
   }
 
-  int index = 0;
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  List<Widget> pages(BuildContext context) => [
+        Center(
+          child: InkWell(
+            onTap: () => MyNavigator.navigateTo(context, Pages.DETAIL),
+            child: Text('detail page'),
+          ),
+        ),
+        Center(
+          child: InkWell(
+            onTap: () => MyNavigator.navigateTo(context, Pages.DETAIL_DETAIL),
+            child: Text('detail detail page'),
+          ),
+        )
+      ];
+
   @override
   Widget build(BuildContext context) {
     return CustomSafeArea(
       page: Scaffold(
         extendBody: true,
         backgroundColor: Colors.white,
-        body: createBody(context, index),
+        body: IndexedStack(children: pages(context), index: index),
         bottomNavigationBar: FluidNavBar(
           defaultIndex: index,
           style: FluidNavBarStyle(
@@ -56,6 +66,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
           onChange: (index) {
+            Provider.of<StateNavBarProvider>(context, listen: false).setIndex =
+                index;
+
             setState(() {
               this.index = index;
             });
