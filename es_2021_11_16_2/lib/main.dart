@@ -28,10 +28,21 @@ class _MyAppState extends State<MyApp> {
               },
             ),
           ),
-          if (page == Page.DETAIL)
+          if (page == Page.DETAIL || page == Page.DETAIL_DETAIL)
             MaterialPage(
               key: ValueKey('detail'),
-              child: DetailPage(),
+              child: DetailPage(
+                detailDetailPage: (Page page) {
+                  setState(() {
+                    this.page = page;
+                  });
+                },
+              ),
+            ),
+          if (page == Page.DETAIL_DETAIL)
+            MaterialPage(
+              key: ValueKey('detail_detail'),
+              child: DetailDetailPage(),
             )
         ],
         onPopPage: (route, result) {
@@ -51,7 +62,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: Center(
         child: InkWell(
           onTap: () => detailPage.call(Page.DETAIL),
@@ -62,18 +76,57 @@ class HomePage extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class DetailPage extends StatelessWidget {
-  const DetailPage({Key? key}) : super(key: key);
+  DetailPage({Key? key, required this.detailDetailPage}) : super(key: key);
+  void Function(Page page) detailDetailPage;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      extendBody: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: Center(
-        child: Text('detail'),
+        child: InkWell(
+          onTap: () => detailDetailPage.call(Page.DETAIL_DETAIL),
+          child: Text('detalil'),
+        ),
       ),
     );
   }
 }
 
-enum Page { HOME, DETAIL }
+class DetailDetailPage extends StatelessWidget {
+  const DetailDetailPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      extendBody: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: Center(
+        child: Text('detail detail'),
+      ),
+    );
+  }
+}
+
+enum Page { HOME, DETAIL, DETAIL_DETAIL }
