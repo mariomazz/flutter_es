@@ -11,6 +11,7 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomSafeArea(
       page: Scaffold(
+        extendBody: true,
         backgroundColor: Colors.white,
         body: Center(
           child: InkWell(

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class CustomSafeArea extends StatelessWidget {
   CustomSafeArea({Key? key, required this.page}) : super(key: key);
   Widget page;
-  final Color colorSafeArea = Colors.white;
+  final Color colorSafeArea = Colors.blue;
 
   @override
   Widget build(BuildContext context) {
