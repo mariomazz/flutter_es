@@ -30,20 +30,23 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
-  List<Widget> pages(BuildContext context) => [
-        Center(
-          child: InkWell(
-            onTap: () => MyNavigator.navigateTo(context, Pages.DETAIL),
-            child: Text('detail page'),
-          ),
+  Widget pages(BuildContext context, int index) {
+    final List<Widget> pages = [
+      Center(
+        child: InkWell(
+          onTap: () => MyNavigator.navigateTo(context, Pages.DETAIL),
+          child: Text('detail page'),
         ),
-        Center(
-          child: InkWell(
-            onTap: () => MyNavigator.navigateTo(context, Pages.DETAIL_DETAIL),
-            child: Text('detail detail page'),
-          ),
-        )
-      ];
+      ),
+      Center(
+        child: InkWell(
+          onTap: () => MyNavigator.navigateTo(context, Pages.DETAIL_DETAIL),
+          child: Text('detail detail page'),
+        ),
+      )
+    ];
+    return pages[index];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +54,7 @@ class _HomePageState extends State<HomePage> {
       page: Scaffold(
         extendBody: true,
         backgroundColor: Colors.white,
-        body: IndexedStack(children: pages(context), index: index),
+        body: pages(context, index),
         bottomNavigationBar: FluidNavBar(
           defaultIndex: index,
           style: FluidNavBarStyle(
