@@ -19,9 +19,11 @@ class MyApp extends StatelessWidget {
             return NavigatorProvider();
           },
         ),
-        ListenableProvider<AuthProvider>(create: (BuildContext context) {
-          return AuthProvider();
-        }),
+        ListenableProvider<AuthProvider>(
+          create: (BuildContext context) {
+            return AuthProvider();
+          },
+        ),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
