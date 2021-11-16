@@ -20,14 +20,14 @@ class _HomePageState extends State<HomePage> {
     final List<Widget> pages = [
       Center(
         child: InkWell(
-          onTap: () => MyNavigator.navigateTo(context, Pages.DETAIL_DETAIL),
-          child: Text('home page'),
+          onTap: () => MyNavigator.navigateTo(context, Pages.DETAIL),
+          child: Text('detail page'),
         ),
       ),
       Center(
         child: InkWell(
-          onTap: () => MyNavigator.navigateTo(context, Pages.DETAIL),
-          child: Text('preferite page'),
+          onTap: () => MyNavigator.navigateTo(context, Pages.DETAIL_DETAIL),
+          child: Text('detail detail page'),
         ),
       )
     ];

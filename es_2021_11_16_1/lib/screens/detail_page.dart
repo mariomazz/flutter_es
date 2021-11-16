@@ -19,6 +19,14 @@ class DetailPage extends StatelessWidget {
             child: Text('detail page'),
           ),
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+        floatingActionButton: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            size: 35.0,
+          ),
+          onPressed: () => MyNavigator.navigateTo(context, Pages.HOME),
+        ),
       ),
     );
   }
