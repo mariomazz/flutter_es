@@ -19,8 +19,8 @@ class NotLoggedPage extends StatelessWidget {
               Text('login'),
               IconButton(
                 onPressed: () =>
-                    Provider.of<AuthProvider>(context, listen: false).setAuth =
-                        true,
+                    Provider.of<AuthProvider>(context, listen: false)
+                        .setAuth(context, true),
                 icon: Icon(
                   Icons.login,
                   size: 35.0,

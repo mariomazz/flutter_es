@@ -1,6 +1,5 @@
 import 'package:es_2021_11_16_1/configurations/models/pages/pages.dart';
 import 'package:es_2021_11_16_1/configurations/providers/authentication/authentication_provider.dart';
-import 'package:es_2021_11_16_1/configurations/providers/state_bav_bar/state_nav_bar_provider.dart';
 import 'package:es_2021_11_16_1/configurations/routing/navigator.dart';
 import 'package:es_2021_11_16_1/widgets/custom_safe_area.dart';
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
@@ -20,8 +19,6 @@ class _HomePageState extends State<HomePage> {
   int index = 0;
   @override
   void initState() {
-    index = Provider.of<StateNavBarProvider>(context, listen: false).getIndex;
-
     super.initState();
   }
 
@@ -69,9 +66,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
           onChange: (index) {
-            Provider.of<StateNavBarProvider>(context, listen: false).setIndex =
-                index;
-
             setState(() {
               this.index = index;
             });
@@ -83,8 +77,8 @@ class _HomePageState extends State<HomePage> {
             Icons.logout,
             size: 35.0,
           ),
-          onPressed: () =>
-              Provider.of<AuthProvider>(context, listen: false).setAuth = false,
+          onPressed: () => Provider.of<AuthProvider>(context, listen: false)
+              .setAuth(context, false),
         ),
       ),
     );
