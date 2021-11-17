@@ -15,7 +15,7 @@ class DetailPage extends StatelessWidget {
         backgroundColor: Colors.white,
         body: Center(
           child: InkWell(
-            onTap: () => MyNavigator.navigateTo(context, Pages.DETAIL_DETAIL),
+            onTap: () {},
             child: Text('detail page'),
           ),
         ),
