@@ -25,7 +25,7 @@ class DetailPage extends StatelessWidget {
             Icons.arrow_back,
             size: 35.0,
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => MyNavigator.pop(context),
         ),
       ),
     );

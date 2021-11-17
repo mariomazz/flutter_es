@@ -8,4 +8,7 @@ class MyNavigator {
           {Object? data = ''}) =>
       Provider.of<NavigatorProvider>(context, listen: false)
           .setPage(page, data: data!);
+
+  static void pop(BuildContext context, {bool? pop}) =>
+      Navigator.pop(context, pop ?? true);
 }

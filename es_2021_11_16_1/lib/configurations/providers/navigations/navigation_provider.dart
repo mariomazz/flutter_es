@@ -14,8 +14,8 @@ class NavigatorProvider extends ChangeNotifier {
   }
 
   void reset() {
-    page = Pages.HOME;
-    navigationData = {};
+    this.page = Pages.HOME;
+    this.navigationData = {};
   }
 
   MyPageModel get getPage => MyPageModel(page: page, data: navigationData);
