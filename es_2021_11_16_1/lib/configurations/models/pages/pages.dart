@@ -1,1 +1,1 @@
-enum Pages { HOME, ERROR, DETAIL, DETAIL_DETAIL }
+enum Pages { HOME, DETAIL, DETAIL_DETAIL }
