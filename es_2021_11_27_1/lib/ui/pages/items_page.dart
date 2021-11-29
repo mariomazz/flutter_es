@@ -1,15 +1,18 @@
 import 'dart:developer';
 
+import 'package:es_2021_11_27_1/core/api_service/api_service.dart';
+import 'package:es_2021_11_27_1/core/api_service/models/post/post.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class ListItemPage extends StatefulWidget {
-  const ListItemPage({Key? key}) : super(key: key);
+class ItemsPage extends StatefulWidget {
+  const ItemsPage({Key? key}) : super(key: key);
 
   @override
-  _ListItemPageState createState() => _ListItemPageState();
+  _ItemsPageState createState() => _ItemsPageState();
 }
 
-class _ListItemPageState extends State<ListItemPage> {
+class _ItemsPageState extends State<ItemsPage> {
   bool loadingData = false;
 
   final List<ListTile> items = [];
@@ -52,11 +55,19 @@ class _ListItemPageState extends State<ListItemPage> {
             child: ListView.separated(
               itemCount: items.length,
               itemBuilder: (context, index) {
-                return Row(
-                  children: [
-                    Text('${index + 1}'),
-                    Expanded(child: Container(child: items[index])),
-                  ],
+                return GestureDetector(
+                  onTap: () async {
+                    final response =
+                        await Provider.of<ApiService>(context, listen: false)
+                            .getPosts();
+                    log(response.body!.first.id.toString());
+                  },
+                  child: Row(
+                    children: [
+                      Text('${index + 1}'),
+                      Expanded(child: Container(child: items[index])),
+                    ],
+                  ),
                 );
               },
               separatorBuilder: (context, index) {
@@ -104,5 +115,21 @@ class _ListItemPageState extends State<ListItemPage> {
         this.loadingData = false;
       }),
     );
+  }
+}
+
+class ListPostsPage extends StatefulWidget {
+  const ListPostsPage({Key? key}) : super(key: key);
+
+  @override
+  _ListPostsPageState createState() => _ListPostsPageState();
+}
+
+class _ListPostsPageState extends State<ListPostsPage> {
+  List<PostModel> posts = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
