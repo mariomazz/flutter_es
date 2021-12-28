@@ -1,8 +1,10 @@
 import 'package:deo_demo/core/api_service/api_service.dart';
 import 'package:deo_demo/core/providers/authentication/auth_provider.dart';
 import 'package:deo_demo/core/models/item.dart';
+import 'package:deo_demo/core/providers/connectivity/connectivity_status.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -36,14 +38,27 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<AuthProvider, bool>(
-      selector: (_, provider) => provider.getIsAuth,
-      builder: (_, isAuth, __) {
+    return Selector2<AuthProvider, ConnectivityService, Tuple2<bool, bool>>(
+      selector: (_, authProvider, connectivityP) =>
+          Tuple2(authProvider.getIsAuth, connectivityP.getHasConnection),
+      builder: (_, dataP, __) {
         /* if (isAuth) { */
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title: items != null ? Text('HOME PAGE') : Text('CARICA ELEMENTI'),
+            title: items != null
+                ? Text(
+                    'HOME PAGE',
+                    style: TextStyle(
+                      color: dataP.item2 ? null : Colors.red,
+                    ),
+                  )
+                : Text(
+                    'CARICA ELEMENTI',
+                    style: TextStyle(
+                      color: dataP.item2 ? null : Colors.red,
+                    ),
+                  ),
             actions: [
               items != null
                   ? InkWell(
@@ -58,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                 onTap: () {},
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: isAuth
+                  child: dataP.item1
                       ? Icon(Icons.logout, color: Colors.green)
                       : Icon(Icons.login, color: Colors.red),
                 ),

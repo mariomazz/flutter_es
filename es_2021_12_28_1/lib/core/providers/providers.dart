@@ -8,16 +8,16 @@ import 'package:provider/single_child_widget.dart';
 class MyProviders {
   static List<SingleChildWidget> getProviders() {
     return [
+      ListenableProvider<ConnectivityService>(
+        create: (context) => ConnectivityService.inizialize(),
+        dispose: (context, provider) => provider.dispose(),
+      ),
       ListenableProvider<AuthProvider>(
         create: (context) => AuthProvider(),
         dispose: (context, provider) => provider.dispose(),
       ),
       ListenableProvider<NavigatorProvider>(
         create: (context) => NavigatorProvider(),
-        dispose: (context, provider) => provider.dispose(),
-      ),
-      ListenableProvider<ConnectivityService>(
-        create: (context) => ConnectivityService(),
         dispose: (context, provider) => provider.dispose(),
       ),
       Provider<ApiService>(

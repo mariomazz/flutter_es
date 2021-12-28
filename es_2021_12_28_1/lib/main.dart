@@ -12,7 +12,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers:  MyProviders.getProviders(),
+      providers: MyProviders.getProviders(),
       child: MaterialApp.router(
         title: 'Navigator 2.0 + DIO library',
         debugShowCheckedModeBanner: false,

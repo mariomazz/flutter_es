@@ -25,18 +25,18 @@ class MyRouterDelegate extends RouterDelegate<Object> {
 
         final bool isAuth = Provider.of<AuthProvider>(context).getIsAuth;
 
-        final ConnectivityStatus connectivityStatus =
-            Provider.of<ConnectivityService>(context).getConnectionStatus;
+        final bool hasConnection =
+            Provider.of<ConnectivityService>(context).getHasConnection;
 
         log(isAuth.toString());
 
         log(currentPage.page.toString());
 
-        log('${connectivityStatus != null ? connectivityStatus.name : 'null'}');
+        log(hasConnection.toString());
 
         return Navigator(
           key: navigatorKey,
-          pages: createPages(currentPage, isAuth, connectivityStatus),
+          pages: createPages(currentPage, isAuth, hasConnection),
           onPopPage: (route, result) {
             return route.didPop(result);
           },
@@ -45,12 +45,11 @@ class MyRouterDelegate extends RouterDelegate<Object> {
     );
   }
 
-  List<Page> createPages(MyPageModel currentPage, bool isAuth,
-      ConnectivityStatus connectivityStatus) {
+  List<Page> createPages(
+      MyPageModel currentPage, bool isAuth, bool hasConnection) {
     List<Page> pages = [];
 
-    if (connectivityStatus == ConnectivityStatus.Cellular ||
-        connectivityStatus == ConnectivityStatus.WiFi) {
+    if (hasConnection) {
       if (currentPage.page == Pages.INTRO) {
         pages.add(
           MyMaterialPage(
@@ -60,14 +59,12 @@ class MyRouterDelegate extends RouterDelegate<Object> {
         );
       }
     } else {
-      if (connectivityStatus == ConnectivityStatus.Offline) {
-        pages.add(
-          MyMaterialPage(
-            WithoutConnectionPage(),
-            key: WithoutConnectionPage.keyPage,
-          ),
-        );
-      }
+      pages.add(
+        MyMaterialPage(
+          WithoutConnectionPage(),
+          key: WithoutConnectionPage.keyPage,
+        ),
+      );
     }
 
     if (pages.isEmpty) {

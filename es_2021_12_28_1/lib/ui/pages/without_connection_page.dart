@@ -7,20 +7,41 @@ class WithoutConnectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SizedBox.expand(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text('non sei connesso a internet'),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(Icons.wifi_lock),
-            ),
-          ],
+      body: FutureBuilder<String>(
+        future: Future.delayed(
+          Duration(
+            milliseconds: 0, // or 500
+          ),
+          () {
+            return ('LOAD COMPLETED');
+          },
         ),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return SizedBox.expand(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('non sei connesso a internet'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(Icons.wifi_lock),
+                  ),
+                ],
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('ERRORE'),
+            );
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
       ),
     );
   }
