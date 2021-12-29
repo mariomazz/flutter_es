@@ -1,10 +1,28 @@
+import 'dart:async';
 import 'package:deo_demo/core/providers/providers.dart';
 import 'package:deo_demo/core/routing/my_route_information_parser.dart';
 import 'package:deo_demo/core/routing/my_router_delegate.dart';
+import 'package:deo_demo/ui/pages/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(MainApp());
+Future<void> main() async {
+  LoadingScreen loadingScreen = LoadingScreen();
+  runApp(
+    MaterialApp(
+      title: 'Load Screen',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: loadingScreen,
+    ),
+  );
+
+  await Future.delayed(loadingScreen.duration, () {});
+
+  runApp(MainApp());
+}
 
 class MainApp extends StatelessWidget {
   MainApp({Key key}) : super(key: key);
