@@ -5,7 +5,7 @@ import 'package:deo_demo/core/providers/authentication/auth_provider.dart';
 import 'package:deo_demo/core/providers/navigation/navigation_provider.dart';
 import 'package:deo_demo/core/routing/page.dart';
 import 'package:deo_demo/core/routing/pages.dart';
-import 'package:deo_demo/ui/pages/intro_page.dart';
+import 'package:deo_demo/ui/pages/home_page.dart';
 import 'package:deo_demo/ui/pages/stack_empty.dart';
 import 'package:deo_demo/ui/pages/without_connection_page.dart';
 import 'package:deo_demo/ui/widgets/my_material_page.dart';
@@ -23,12 +23,12 @@ class MyRouterDelegate extends RouterDelegate<Object> {
         final MyPageModel currentPage =
             Provider.of<NavigatorProvider>(context).getPage;
 
-        final bool isAuth = Provider.of<AuthProvider>(context).getIsAuth;
+        final bool isLoggedIn = Provider.of<AuthProvider>(context).isLoggedIn;
 
         final bool hasConnection =
             Provider.of<ConnectivityService>(context).getHasConnection;
 
-        log(isAuth.toString());
+        log(isLoggedIn.toString());
 
         log(currentPage.page.toString());
 
@@ -36,7 +36,7 @@ class MyRouterDelegate extends RouterDelegate<Object> {
 
         return Navigator(
           key: navigatorKey,
-          pages: createPages(currentPage, isAuth, hasConnection),
+          pages: createPages(currentPage, isLoggedIn, hasConnection),
           onPopPage: (route, result) {
             return route.didPop(result);
           },
@@ -46,15 +46,15 @@ class MyRouterDelegate extends RouterDelegate<Object> {
   }
 
   List<Page> createPages(
-      MyPageModel currentPage, bool isAuth, bool hasConnection) {
+      MyPageModel currentPage, bool isLoggedIn, bool hasConnection) {
     List<Page> pages = [];
 
     if (hasConnection) {
-      if (currentPage.page == Pages.INTRO) {
+      if (currentPage.page == Pages.HOME) {
         pages.add(
           MyMaterialPage(
-            IntroPage(),
-            key: IntroPage.keyPage,
+            HomePage(),
+            key: HomePage.keyPage,
           ),
         );
       }

@@ -3,7 +3,7 @@ import 'package:deo_demo/core/routing/pages.dart';
 import 'package:flutter/material.dart';
 
 class NavigatorProvider extends ChangeNotifier {
-  Pages page = Pages.INTRO;
+  Pages page = Pages.HOME;
 
   Object navigationData = {};
 
@@ -14,7 +14,7 @@ class NavigatorProvider extends ChangeNotifier {
   }
 
   void reset() {
-    this.page = Pages.INTRO;
+    this.page = Pages.HOME;
     this.navigationData = {};
   }
 

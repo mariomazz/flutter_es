@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 
@@ -32,7 +31,6 @@ class _MyCircularProgressIndicatorState
 
     timer =
         Timer.periodic(Duration(milliseconds: loadingTime.floor()), (value) {
-      print('Percent Update $percent');
       setState(() {
         percent += 1;
         if (percent >= 100) {

@@ -1,124 +1,53 @@
 import 'package:deo_demo/core/api_service/api_service.dart';
 import 'package:deo_demo/core/providers/authentication/auth_provider.dart';
-import 'package:deo_demo/core/models/item.dart';
-import 'package:deo_demo/core/providers/connectivity/connectivity_status.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  List<Post> items;
-
-  void resetElement() {
-    setState(() {
-      items = null;
-    });
-  }
-
-  Future<void> getItems() async {
-    final response =
-        await Provider.of<ApiService>(context, listen: false).getPosts();
-
-    setState(() {
-      items = response.posts;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
+class HomePage extends StatelessWidget {
+  const HomePage({Key key}) : super(key: key);
+  static ValueKey keyPage = ValueKey('home_page');
 
   @override
   Widget build(BuildContext context) {
-    return Selector2<AuthProvider, ConnectivityService, Tuple2<bool, bool>>(
-      selector: (_, authProvider, connectivityP) =>
-          Tuple2(authProvider.getIsAuth, connectivityP.getHasConnection),
-      builder: (_, dataP, __) {
-        /* if (isAuth) { */
-        return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: items != null
-                ? Text(
-                    'HOME PAGE',
-                    style: TextStyle(
-                      color: dataP.item2 ? null : Colors.red,
-                    ),
-                  )
-                : Text(
-                    'CARICA ELEMENTI',
-                    style: TextStyle(
-                      color: dataP.item2 ? null : Colors.red,
-                    ),
-                  ),
-            actions: [
-              items != null
-                  ? InkWell(
-                      onTap: () async => resetElement(),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon(Icons.restore),
-                      ),
-                    )
-                  : Container(),
-              InkWell(
-                onTap: () {},
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: dataP.item1
-                      ? Icon(Icons.logout, color: Colors.green)
-                      : Icon(Icons.login, color: Colors.red),
-                ),
-              )
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        title: Text(
+          'Home Page',
+          style: TextStyle(
+            color: Colors.black,
           ),
-          body: items != null
-              ? buildListItems()
-              : Center(
-                  child: ElevatedButton(
-                    onPressed: () => getItems(),
-                    child: Text('Carica'),
-                  ),
-                ),
-        );
-        /* }  else {
-          return Scaffold(
-            appBar: AppBar(
-              centerTitle: true,
-              title: Text('NON SEI LOGGATO'),
+        ),
+        backgroundColor:
+            Provider.of<AuthProvider>(context, listen: false).isLoggedIn
+                ? Colors.yellow
+                : Colors.red,
+        actions: [
+          IconButton(
+            onPressed: () =>
+                Provider.of<AuthProvider>(context, listen: false).logIn(),
+            icon: Icon(
+              Icons.ac_unit,
             ),
-            body: Center(
-              child: Text('NON SEI LOGGATO'),
-            ),
-          );
-        } */
-      },
-    );
-  }
-
-  Widget buildListItems() {
-    return RefreshIndicator(
-      onRefresh: () async => getItems(),
-      child: ListView.builder(
-        physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics()),
-        itemBuilder: (context, index) {
-          return ListTile(
-            leading: Text(items[index].id.toString()),
-            title: Text(items[index].title),
-            subtitle: Text(items[index].body),
-            trailing: Text(items[index].userId.toString()),
+          )
+        ],
+      ),
+      body: FutureBuilder<dynamic>(
+        future: Provider.of<ApiService>(context, listen: false).getWarnings(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return SingleChildScrollView(
+              child: Text('${snapshot.data}'),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('ERRORE'),
+            );
+          }
+          return Center(
+            child: CircularProgressIndicator(),
           );
         },
-        itemCount: items.length,
       ),
     );
   }

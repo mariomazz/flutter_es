@@ -57,10 +57,6 @@ class ConnectivityService extends ChangeNotifier {
 
     return hasConnection;
   }
-
-  Future<bool> connectivityIsEmpty(Connectivity connectivity) async {
-    return await connectivity.onConnectivityChanged.isEmpty ? true : false;
-  }
 }
 
 enum ConnectivityStatus {

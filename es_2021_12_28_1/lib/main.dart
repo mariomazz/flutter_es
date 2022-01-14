@@ -2,12 +2,12 @@ import 'dart:async';
 import 'package:deo_demo/core/providers/providers.dart';
 import 'package:deo_demo/core/routing/my_route_information_parser.dart';
 import 'package:deo_demo/core/routing/my_router_delegate.dart';
-import 'package:deo_demo/ui/pages/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
-  LoadingScreen loadingScreen = LoadingScreen();
+  /*  LoadingScreen loadingScreen =
+      LoadingScreen(duration: Duration(milliseconds: 2500));
   runApp(
     MaterialApp(
       title: 'Load Screen',
@@ -19,8 +19,7 @@ Future<void> main() async {
     ),
   );
 
-  await Future.delayed(loadingScreen.duration, () {});
-
+  await Future.delayed(loadingScreen.duration, () {}); */
   runApp(MainApp());
 }
 

@@ -1,36 +1,58 @@
-import 'package:deo_demo/core/api_service/api_service.dart';
-import 'package:deo_demo/core/providers/navigation/navigation_provider.dart';
+import 'package:deo_demo/core/api_service/identity_service.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class AuthProvider extends ChangeNotifier {
-  bool isAuth = false;
-  bool get getIsAuth => isAuth;
+  final IdentityService identityService = IdentityService();
+  bool _isLoggedIn = true;
 
-  Future checkIsAuth(BuildContext context) async {
-    /*this is the control method for authentication, call the API and check if the token is valid or not, if it is valid you are authenticated otherwise you are not authenticated, all this always doing it with the token saved in memory*/
-    final token = await '';
-    if (false) {
-      //If() you have the token saved
-
-      await Provider.of<ApiService>(context, listen: false).checkAPI();
-    } else {
-      //Else you are not logged in
-    }
-
-    return Future.value();
+  get isLoggedIn {
+    return _isLoggedIn;
   }
 
-  void logIn() async {}
+  String accessToken;
+  String get getAccessToken => accessToken ?? '';
 
-  void logOut() async {
-    // clear database - secure storage
+  set setAccessToken(String accessToken) {
+    this.accessToken = accessToken;
   }
 
-  void setAuth(BuildContext context, bool isAuth) {
-    this.isAuth = isAuth;
-    Provider.of<NavigatorProvider>(context, listen: false)
-        .reset(); // this is for navigator 2.0
+  Future<void> logIn() async {
+    // ignore: missing_return
+    final response = await this.identityService.login().onError((error, stackTrace) {
+      // Handle error
+    });
+    this._isLoggedIn = response != null;
     notifyListeners();
   }
+
+  /*Future<void> logOut() async {
+    try {
+      final idToken = await secureStorage.read(key: DATABASE_KEY_ACCESSTOKEN);
+
+      if (idToken == null || idToken == '') {
+        throw new Exception(
+          "Database \'secure storage\' - ID_TOKEN vuoto - null",
+        );
+      }
+
+      final logoutResponse = await appAuth.endSession(
+        new EndSessionRequest(
+          idTokenHint: idToken,
+          postLogoutRedirectUrl: login.postLogoutRedirectUrl,
+          serviceConfiguration: login.serviceConfiguration,
+          additionalParameters: login.parameter,
+        ),
+      );
+
+      if (logoutResponse == null) {
+        throw new Exception("Nessuna risposta ricevuta - null");
+      }
+
+      await clearTokensFromDB();
+
+      notifyListeners();
+    } catch (e) {
+      log('ECCEZIONE LOGOUT : $e');
+    }
+  }*/
 }

@@ -1,4 +1,4 @@
-import 'package:deo_demo/core/providers/authentication/auth_provider.dart';
+/* import 'package:deo_demo/core/providers/authentication/auth_provider.dart';
 import 'package:deo_demo/ui/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,3 +31,4 @@ class IntroPage extends StatelessWidget {
     );
   }
 }
+ */

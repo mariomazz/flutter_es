@@ -21,16 +21,17 @@ class RecipeListPage extends StatelessWidget {
             centerTitle: true,
           ),
           SliverPadding(
-              padding: const EdgeInsets.all(20),
-              sliver: SliverFixedExtentList(
-                itemExtent: 110,
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) => Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: RecipeItem(recipes[index])),
-                  childCount: recipes.length,
-                ),
-              )),
+            padding: const EdgeInsets.all(20),
+            sliver: SliverFixedExtentList(
+              itemExtent: 110,
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: RecipeItem(recipes[index])),
+                childCount: recipes.length,
+              ),
+            ),
+          ),
           const SliverToBoxAdapter(
             child: FooterWidget(),
           ),
