@@ -1,3 +1,4 @@
+import 'package:es_2022_02_02_1/ui/widgets/drawer_button.dart';
 import 'package:flutter/material.dart';
 
 class Page404 extends StatelessWidget {
@@ -8,6 +9,7 @@ class Page404 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const DrawerButton(),
         title: const Text('NOT FOUND 404'),
         elevation: 0,
       ),

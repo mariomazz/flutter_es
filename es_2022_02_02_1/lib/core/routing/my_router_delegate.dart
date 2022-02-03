@@ -1,12 +1,11 @@
 import 'package:es_2022_02_02_1/core/routing/pages.dart';
 import 'package:es_2022_02_02_1/ui/pages/home.dart';
+import 'package:es_2022_02_02_1/ui/pages/main_screen.dart';
 import 'package:es_2022_02_02_1/ui/pages/page404.dart';
 import 'package:es_2022_02_02_1/ui/pages/profile.dart';
 import 'package:es_2022_02_02_1/ui/widgets/my_material_page.dart';
 import 'package:flutter/material.dart';
-
 import 'models/page_configuration.dart';
-
 
 class MyRouterDelegate extends RouterDelegate<PageConfiguration>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<PageConfiguration> {
@@ -22,7 +21,8 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
   @override
   PageConfiguration get currentConfiguration => routingInformation;
 
-  final PageConfiguration _initialRoutingInformation = PageConfiguration(key: UniqueKey().toString(), page: Pages.home, path: '/home');
+  final PageConfiguration _initialRoutingInformation = PageConfiguration(
+      key: UniqueKey().toString(), page: Pages.home, path: '/home');
 
   late PageConfiguration _routingInformation;
 
@@ -49,30 +49,24 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
 
   List<Page> buildPages() {
     List<Page> pages = [];
-      if (routingInformation.page == Pages.home) 
-       {
-        pages.add(
-          MyMaterialPage(
-            key: HomePage.keyPage,
-            child: const HomePage(),
-          ),
-        );
-      } else if (routingInformation.page == Pages.profile) {
-        pages.add(
-          MyMaterialPage(
-            key: ProfilePage.keyPage,
-            child: const ProfilePage(),
-          ),
-        );
-      } else {
-        pages.add(
-          MyMaterialPage(
-            key: Page404.keyPage,
-            child: const Page404(),
-          ),
-        );
-      }
-    
+
+    pages.add(
+      MyMaterialPage(
+        key: MainScreen.keyPage,
+        child: MainScreen(),
+      ),
+    );
     return pages;
+  }
+
+  Widget widgetFromPageConfiguration(PageConfiguration configuration) {
+    switch (configuration.page) {
+      case Pages.home:
+        return const HomePage();
+      case Pages.profile:
+        return const ProfilePage();
+      default:
+        return const Page404();
+    }
   }
 }
