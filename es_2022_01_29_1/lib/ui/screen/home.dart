@@ -68,7 +68,8 @@ class _HomePageState extends State<HomePage> {
             .then((posts) => setState(() => this.posts = posts)),
         child: ListView.builder(
           physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           itemCount: posts.length,
