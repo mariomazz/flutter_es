@@ -11,8 +11,6 @@ class MainScreen extends StatelessWidget {
   static final GlobalKey<ScaffoldState> _scaffoldKey =
       GlobalKey<ScaffoldState>();
 
-  GlobalKey<ScaffoldState> get scaffoldKey => _scaffoldKey;
-
   static void controlMenu() {
     if (!_scaffoldKey.currentState!.isDrawerOpen) {
       _scaffoldKey.currentState!.openDrawer();

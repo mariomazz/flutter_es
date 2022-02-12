@@ -1,0 +1,24 @@
+[{
+        "family": "NotoSans",
+        "fonts": [{
+            "asset": "fonts/NotoSans-Regular.ttf"
+        }]
+    },
+    {
+        "family": "Poppins",
+        "fonts": [{
+            "asset": "fonts/Poppins-Regular.ttf"
+        }]
+    },
+    {
+        "family": "Roboto",
+        "fonts": [{
+            "asset": "fonts/Roboto-Regular.ttf"
+        }]
+    }, {
+        "family": "ZenKakuGothicAntique",
+        "fonts": [{
+            "asset": "fonts/ZenKakuGothicAntique-Regular.ttf"
+        }]
+    }
+]
