@@ -1,10 +1,23 @@
 import 'package:es_2022_01_16_1/ui/core/controllers/couter_controller.dart';
 import 'package:flutter/material.dart';
+import '../core/api/service.dart';
 
-class MyHomePage extends StatelessWidget {
-  MyHomePage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final controller = CounterController();
+
+  @override
+  void initState() {
+    // ignore: avoid_print
+    ApiService.service.getPosts().then((e) => {print(e.items.length)});
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +57,8 @@ class MyHomePage extends StatelessWidget {
             width: 10,
           ),
           FloatingActionButton(
-            onPressed: () => controller.counterEventSink.add(DecrementEvent()),
+            //onPressed: () => controller.counterEventSink.add(DecrementEvent()),
+            onPressed: () => setState(() {}),
             tooltip: 'Increment',
             child: const Icon(Icons.remove),
           ),

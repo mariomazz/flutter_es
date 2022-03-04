@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'ui/pages/home_page.dart';
+import 'ui/pages/posts_page.dart';
 
 Future<void> main() async {
   runApp(const MyApp());
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: const PostsPage(),
     );
   }
 }
