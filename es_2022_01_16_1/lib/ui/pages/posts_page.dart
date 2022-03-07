@@ -11,39 +11,6 @@ class PostsPage extends StatefulWidget {
 
 class _PostsPageState extends State<PostsPage> {
   final PostsController controller = PostsController();
-  /* Posts posts = Posts(items: [
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-    Post(body: 'feiuferigeg', title: 'gegergeregr', userId: 8, id: 99),
-  ]); */
-
-  void refreshPosts() {
-    controller.clearData();
-    setState(() {});
-  }
 
   @override
   void initState() {
@@ -64,7 +31,9 @@ class _PostsPageState extends State<PostsPage> {
         actions: [
           IconButton(
             onPressed: () {
-              setState(() {});
+              setState(() {
+                controller.clearData();
+              });
             },
             icon: const Icon(Icons.refresh),
           ),
@@ -72,37 +41,28 @@ class _PostsPageState extends State<PostsPage> {
         elevation: 0,
       ),
       body: StreamBuilder<Posts>(
-        key: UniqueKey(),
         stream: controller.streamPosts,
         builder: (context, snapshot) {
-          return snapshot.hasData
-              ? RefreshIndicator(
-                  onRefresh: () async => refreshPosts(),
-                  child: SizedBox.expand(
-                    child: ListView.builder(
-                      itemCount: snapshot.data?.items.length ?? 0,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title:
-                              Text(snapshot.data?.items[index].title ?? 'null'),
-                        );
-                      },
-                    ),
-                  ),
-                )
-              : const Center(child: CircularProgressIndicator());
+          return RefreshIndicator(
+            onRefresh: () async {
+              setState(() {
+                controller.clearData();
+              });
+            },
+            child: SizedBox.expand(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: snapshot.data?.items.length ?? 0,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(snapshot.data?.items[index].title ?? 'null'),
+                  );
+                },
+              ),
+            ),
+          );
         },
       ),
-      /* body: SizedBox.expand(
-        child: ListView.builder(
-          itemCount: posts.items.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(posts.items.elementAt(index).title),
-            );
-          },
-        ),
-      ), */
     );
   }
 }
