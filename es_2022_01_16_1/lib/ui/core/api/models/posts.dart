@@ -1,5 +1,7 @@
 import 'dart:core';
 
+import 'package:flutter/foundation.dart';
+
 extension PostsExtension on Posts {
   bool validate() {
     if (items.isNotEmpty) {
@@ -16,19 +18,38 @@ class Posts {
   Posts({required this.items});
 
   factory Posts.fromJson(dynamic json) {
-    final listDynamic = List<dynamic>.from(json);
-    final posts = listDynamic
-        .map(
-          (e) => Post(
-            userId: e["userId"] ?? 0,
-            id: e["id"] ?? 0,
-            title: e["title"] ?? "null",
-            body: e["body"] ?? "null",
-          ),
-        )
-        .toList();
-
-    return Posts(items: posts);
+    try {
+      if (json is List) {
+        return Posts(
+          items: List<dynamic>.from(json)
+              .map(
+                (e) => Post(
+                  userId: e["userId"] ?? 0,
+                  id: e["id"] ?? 0,
+                  title: e["title"] ?? "null",
+                  body: e["body"] ?? "null",
+                ),
+              )
+              .toList(),
+        );
+      } else if (json is Map) {
+        return Posts(items: [
+          Post(
+            userId: json["userId"] ?? 0,
+            id: json["id"] ?? 0,
+            title: json["title"] ?? "null",
+            body: json["body"] ?? "null",
+          )
+        ]);
+      } else {
+        throw Exception("Type Json Error");
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print("Posts fromJson => $e");
+      }
+      return Posts(items: List.empty());
+    }
   }
 }
 

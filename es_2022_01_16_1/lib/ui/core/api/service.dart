@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'models/posts.dart';
 
 class ApiService {
@@ -11,14 +10,11 @@ class ApiService {
 
   ApiService();
 
-  Future<Posts> getPosts() async {
+  Future<Posts> getPosts({int? id}) async {
     try {
-      final response =
-          await dio.get('https://jsonplaceholder.typicode.com/posts');
-      if (kDebugMode) {
-        print('call posts');
-      }
-      return Posts.fromJson(response.data);
+      return Posts.fromJson((await dio
+              .get('https://jsonplaceholder.typicode.com/posts/${id ?? ''}'))
+          .data);
     } catch (e) {
       return Posts(items: []);
     }
