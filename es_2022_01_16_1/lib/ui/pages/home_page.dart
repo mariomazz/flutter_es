@@ -1,6 +1,6 @@
+import 'package:es_2022_01_16_1/ui/core/controllers/couter_controller.dart';
 import 'package:flutter/material.dart';
-import '../../core/api/service.dart';
-import '../../core/controllers/couter_controller.dart';
+import '../core/api/service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

@@ -1,32 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../../core/api/models/posts.dart';
-import '../../core/controllers/posts_controller.dart';
-import '../widgets/snapshot_resolving.dart';
-
-enum Size { small, medium, large }
-
-class Stack<T> {
-  final List<T> _stack = [];
-
-  List<T> get value => _stack;
-
-  int get length => value.length;
-
-  void push(T item) => _stack.add(item);
-
-  void pop() {
-    if (value.isNotEmpty) {
-      _stack.removeLast();
-    }
-  }
-}
-
-T stringToEnum<T>(String str, Iterable<T> values) {
-  return values.firstWhere(
-    (value) => value.toString().split('.')[1] == str,
-  );
-}
+import '../core/api/models/posts.dart';
+import '../core/controllers/posts_controller.dart';
 
 class PostsPage extends StatefulWidget {
   const PostsPage({Key? key}) : super(key: key);
@@ -36,17 +10,10 @@ class PostsPage extends StatefulWidget {
 }
 
 class _PostsPageState extends State<PostsPage> {
-  final ApiController<String> _controller = ApiController<String>();
-
-  final stack = Stack<String>();
+  final PostsController _controller = PostsController();
 
   @override
   void initState() {
-    stack.pop();
-    if (kDebugMode) {
-      print(stack.value);
-    }
-    // var value = stringToEnum("large", Size.values);
     super.initState();
   }
 
@@ -74,18 +41,27 @@ class _PostsPageState extends State<PostsPage> {
       body: StreamBuilder<Posts>(
         stream: _controller.streamPosts,
         builder: (context, snapshot) {
-          return SnapshotResolving(
-            snapshot: snapshot,
-            onData: listPosts(
-              posts: snapshot.data ?? Posts(items: List.empty()),
-            ),
-            onError: Center(
-              child: Text('Error => ${snapshot.error?.toString()}'),
-            ),
-            onProcessed: const Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
+          if (snapshot.hasData) {
+            return listPosts(
+                posts: snapshot.data ?? Posts(items: List.empty()));
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.connectionState == ConnectionState.active ||
+              snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              return Center(
+                  child: Text('Error => ${snapshot.error?.toString()}'));
+            } else if (snapshot.hasData) {
+              return listPosts(
+                  posts: snapshot.data ?? Posts(items: List.empty()));
+            } else {
+              return const Center(child: Text('Empty data'));
+            }
+          } else {
+            return Center(child: Text('State: ${snapshot.connectionState}'));
+          }
         },
       ),
     );
