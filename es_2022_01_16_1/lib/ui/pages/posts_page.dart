@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../core/api/models/posts.dart';
-import '../../core/controllers/posts_controller.dart';
-import '../widgets/snapshot_resolving.dart';
+import '../../core/api/service.dart';
+import '../../core/controllers/api_controller.dart';
+import '../widgets/api_controller_w.dart';
 
 class PostsPage extends StatefulWidget {
   const PostsPage({Key? key}) : super(key: key);
@@ -11,7 +12,9 @@ class PostsPage extends StatefulWidget {
 }
 
 class _PostsPageState extends State<PostsPage> {
-  final PostsController _controller = PostsController();
+  final ApiController<Posts> _controller = ApiController<Posts>(
+    fetchData: () async => await ApiService.service.getPosts(),
+  );
 
   @override
   void initState() {
@@ -20,7 +23,7 @@ class _PostsPageState extends State<PostsPage> {
 
   @override
   void dispose() {
-    _controller.clearData();
+    _controller.clear();
     super.dispose();
   }
 
@@ -39,16 +42,9 @@ class _PostsPageState extends State<PostsPage> {
         ],
         elevation: 0,
       ),
-      body: StreamBuilder<Posts>(
-        stream: _controller.streamPosts,
-        builder: (context, snapshot) {
-          return SnapshotResolving(
-            snapshot: snapshot,
-            onData: listPosts(
-              posts: snapshot.data ?? Posts(items: List.empty()),
-            ),
-          );
-        },
+      body: ApiControllerW<Posts>(
+        stream: _controller.stream,
+        onData: (data) => listPosts(posts: data ?? Posts(items: List.empty())),
       ),
     );
   }
@@ -57,7 +53,7 @@ class _PostsPageState extends State<PostsPage> {
     return RefreshIndicator(
       onRefresh: () async {
         setState(() {
-          _controller.clearData();
+          _controller.clear();
         });
       },
       child: SizedBox.expand(

@@ -1,5 +1,4 @@
 import 'dart:core';
-
 import 'package:flutter/foundation.dart';
 
 extension PostsExtension on Posts {
