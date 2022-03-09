@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../core/api/models/posts.dart';
-import '../core/controllers/posts_controller.dart';
+import '../../core/api/models/posts.dart';
+import '../../core/controllers/posts_controller.dart';
+import '../widgets/snapshot_resolving.dart';
 
 class PostsPage extends StatefulWidget {
   const PostsPage({Key? key}) : super(key: key);
@@ -41,27 +42,12 @@ class _PostsPageState extends State<PostsPage> {
       body: StreamBuilder<Posts>(
         stream: _controller.streamPosts,
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return listPosts(
-                posts: snapshot.data ?? Posts(items: List.empty()));
-          }
-
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.connectionState == ConnectionState.active ||
-              snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasError) {
-              return Center(
-                  child: Text('Error => ${snapshot.error?.toString()}'));
-            } else if (snapshot.hasData) {
-              return listPosts(
-                  posts: snapshot.data ?? Posts(items: List.empty()));
-            } else {
-              return const Center(child: Text('Empty data'));
-            }
-          } else {
-            return Center(child: Text('State: ${snapshot.connectionState}'));
-          }
+          return SnapshotResolving(
+            snapshot: snapshot,
+            onData: listPosts(
+              posts: snapshot.data ?? Posts(items: List.empty()),
+            ),
+          );
         },
       ),
     );
