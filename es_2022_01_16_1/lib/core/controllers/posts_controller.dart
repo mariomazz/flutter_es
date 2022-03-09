@@ -2,16 +2,16 @@ import 'dart:async';
 import '../api/models/posts.dart';
 import '../api/service.dart';
 
-class PostsController {
-  PostsController();
+class ApiController<T> {
+  ApiController();
 
   Posts? _posts;
 
-  Stream<Posts> get streamPosts => _fetchPosts();
+  Stream<T> get streamPosts => _fetchPosts();
 
-  Stream<Posts> _fetchPosts() async* {
+  Stream<T> _fetchPosts() async* {
     if (_posts == null) {
-      final posts = await ApiService.service.getPosts();
+      final posts = await ApiService.service.get(path: 'cjijijr');
       _posts = posts;
       yield posts;
     } else {
