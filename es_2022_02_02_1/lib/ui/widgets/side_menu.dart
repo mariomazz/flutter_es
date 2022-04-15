@@ -1,6 +1,5 @@
 import 'package:es_2022_02_02_1/core/routing/models/page_configuration.dart';
 import 'package:es_2022_02_02_1/core/routing/my_router_delegate.dart';
-import 'package:es_2022_02_02_1/core/routing/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,9 +14,9 @@ class SideMenu extends StatelessWidget {
       backgroundColor: Colors.blue,
       child: ListView(
         children: [
-          DrawerHeader(
-            margin: const EdgeInsets.only(top: 50),
-            child: Image.asset("assets/images/logo.png"),
+          const DrawerHeader(
+            margin: EdgeInsets.only(top: 50),
+            child: SizedBox(),
           ),
           const Center(
             child: Text(
@@ -30,13 +29,7 @@ class SideMenu extends StatelessWidget {
             svgSrc: "assets/icons/menu_dashbord.svg",
             press: () async {
               await Provider.of<MyRouterDelegate>(context, listen: false)
-                  .setNewRoutePath(
-                PageConfiguration(
-                  key: UniqueKey().toString(),
-                  page: Pages.home,
-                  path: '/home',
-                ),
-              );
+                  .setNewRoutePath(PageConfiguration.home());
             },
           ),
           DrawerListTile(
@@ -44,13 +37,7 @@ class SideMenu extends StatelessWidget {
             svgSrc: "assets/icons/menu_tran.svg",
             press: () async {
               await Provider.of<MyRouterDelegate>(context, listen: false)
-                  .setNewRoutePath(
-                PageConfiguration(
-                  key: UniqueKey().toString(),
-                  page: Pages.profile,
-                  path: '/profile',
-                ),
-              );
+                  .setNewRoutePath(PageConfiguration.profile());
             },
           ),
           DrawerListTile(
@@ -58,13 +45,7 @@ class SideMenu extends StatelessWidget {
             svgSrc: "assets/icons/menu_doc.svg",
             press: () async {
               await Provider.of<MyRouterDelegate>(context, listen: false)
-                  .setNewRoutePath(
-                PageConfiguration(
-                  key: UniqueKey().toString(),
-                  page: Pages.error404,
-                  path: '/error',
-                ),
-              );
+                  .setNewRoutePath(PageConfiguration.error404());
             },
           ),
           /*    DrawerListTile(

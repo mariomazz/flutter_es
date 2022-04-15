@@ -1,39 +1,48 @@
-import 'package:es_2022_02_10_1/ui/widget/neumorphic_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import '../widget/chip.dart';
+import '../widget/padding.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> _chips =
+        List<Widget>.generate(10, (index) => const ChipCS());
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
-      body: const SizedBox.expand(
-        child: Center(
-          child: NeumorphicButton(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(18.0),
-                child: Text(
-                  'Giada Mazzarelli',
-                  style: TextStyle(
-                    fontSize: 30,
+      body: SizedBox.expand(
+        child: Column(
+          children: [
+            PaddingCS(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    "Chat Bot",
+                    style: TextStyle(
+                      fontSize: 30,
+                    ),
                   ),
-                  textAlign: TextAlign.center,
-                ),
+                  SizedBox(width: 15),
+                  Icon(Icons.android)
+                ],
               ),
-              Padding(
-                padding: EdgeInsets.all(18.0),
-                child: Text(
-                  'Sito Web Mauro Mazzarelli',
-                  style: TextStyle(
-                    fontSize: 30,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: _chips.length,
+                itemBuilder: (context, index) =>
+                    PaddingCS(child: _chips.elementAt(index)),
               ),
-            ],
-          ),
+            ),
+            TextButton(
+              onPressed: () {
+                context.go("/profile", extra: {"mario": "ciao mario"});
+              },
+              child: const Icon(Icons.arrow_circle_right),
+            ),
+          ],
         ),
       ),
     );

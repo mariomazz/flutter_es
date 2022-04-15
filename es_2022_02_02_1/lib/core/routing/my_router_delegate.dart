@@ -9,58 +9,65 @@ import 'models/page_configuration.dart';
 
 class MyRouterDelegate extends RouterDelegate<PageConfiguration>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<PageConfiguration> {
-  late GlobalKey<NavigatorState> _navigatorKey;
+  // singleton
 
-  MyRouterDelegate() {
-    _navigatorKey = GlobalKey<NavigatorState>();
-    _routingInformation = _initialRoutingInformation;
-  }
+  static final MyRouterDelegate _instance = MyRouterDelegate();
+  static MyRouterDelegate get instance => _instance;
+  static final GlobalKey<NavigatorState> _navigatorKey =
+      GlobalKey<NavigatorState>(debugLabel: 'my_router_delegate_key');
+  static GlobalKey<NavigatorState> get navigatorInstance => _navigatorKey;
 
-  @override
-  GlobalKey<NavigatorState> get navigatorKey => _navigatorKey;
-  @override
-  PageConfiguration get currentConfiguration => routingInformation;
+  // end singleton
 
-  final PageConfiguration _initialRoutingInformation = PageConfiguration(
-      key: UniqueKey().toString(), page: Pages.home, path: '/home');
-
-  late PageConfiguration _routingInformation;
+  PageConfiguration _routingInformation = PageConfiguration.home();
 
   PageConfiguration get routingInformation => _routingInformation;
 
-  void setRoutingConfigurations(PageConfiguration routingInformation) {
-    _routingInformation = routingInformation;
+  set _setRoutingInformation(PageConfiguration routingInformation) =>
+      _routingInformation = routingInformation;
+
+  @override
+  GlobalKey<NavigatorState> get navigatorKey => _navigatorKey;
+
+  @override
+  PageConfiguration get currentConfiguration => routingInformation;
+
+  @override
+  Future<void> setNewRoutePath(PageConfiguration configuration) async =>
+      setRoutingInformation(configuration);
+
+  @override
+  Future<bool> popRoute() async {
+    print('pop override');
+    return true;
+  }
+
+  Future<void> navTo(PageConfiguration configuration) async =>
+      await setNewRoutePath(configuration);
+
+  void setRoutingInformation(PageConfiguration routingInformation) {
+    _setRoutingInformation = routingInformation;
     notifyListeners();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Navigator(
-      pages: buildPages(),
-      onPopPage: (route, _) {
-        return true;
-      },
-    );
-  }
+  Widget build(BuildContext context) => Navigator(
+        key: navigatorKey,
+        pages: buildPages(),
+        onPopPage: (route, data) {
+          print('pop Navigator');
+          return route.didPop(data);
+        },
+      );
 
-  @override
-  Future<void> setNewRoutePath(PageConfiguration configuration) async =>
-      setRoutingConfigurations(configuration);
+  List<Page> buildPages() => [
+        MyMaterialPage(
+          child: const MainScreen(),
+        ),
+      ];
 
-  List<Page> buildPages() {
-    List<Page> pages = [];
-
-    pages.add(
-      MyMaterialPage(
-        key: MainScreen.keyPage,
-        child: MainScreen(),
-      ),
-    );
-    return pages;
-  }
-
-  Widget widgetFromPageConfiguration(PageConfiguration configuration) {
-    switch (configuration.page) {
+  Widget widgetFromPageConfiguration(PageConfiguration routingInformation) {
+    switch (routingInformation.page) {
       case Pages.home:
         return const HomePage();
       case Pages.profile:

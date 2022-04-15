@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
-import 'ui/screens/home_page.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'core/routing/routing.dart';
+
+Future<void> main() async {
+  runApp(const ChatBotApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+class ChatBotApp extends StatelessWidget {
+  const ChatBotApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'Sito Web Mauro Mazzarelli',
+      title: 'Chat Bot Website',
       theme: ThemeData(
         primarySwatch: Colors.green,
         fontFamily: 'Poppins',
       ),
-      home: const HomePage(),
+      routeInformationParser: Routing.delegate.routes.routeInformationParser,
+      routerDelegate: Routing.delegate.routes.routerDelegate,
     );
   }
 }

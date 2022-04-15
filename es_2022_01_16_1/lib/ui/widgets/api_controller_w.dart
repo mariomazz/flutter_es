@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/* import 'package:flutter/material.dart';
 
 class ApiControllerW<T> extends StatelessWidget {
   const ApiControllerW({
@@ -12,7 +12,7 @@ class ApiControllerW<T> extends StatelessWidget {
   final Stream<T> stream;
   final Widget? onError;
   final Widget? loading;
-  final Widget? Function(T?) onData;
+  final Widget Function(T?) onData;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class ApiControllerW<T> extends StatelessWidget {
       stream: stream,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return onData.call(snapshot.data) ?? Container();
+          return onData.call(snapshot.data);
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -31,7 +31,7 @@ class ApiControllerW<T> extends StatelessWidget {
             return onError ??
                 Center(child: Text('Error => ${snapshot.error?.toString()}'));
           } else if (snapshot.hasData) {
-            return onData.call(snapshot.data) ?? Container();
+            return onData.call(snapshot.data);
           } else {
             return const Center(child: Text('Empty data'));
           }
@@ -42,3 +42,4 @@ class ApiControllerW<T> extends StatelessWidget {
     );
   }
 }
+ */

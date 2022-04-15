@@ -1,6 +1,4 @@
-import 'dart:async';
-
-class ApiController<T> {
+/* class ApiController<T> {
   Future<T> Function() fetchData;
 
   // BLOC
@@ -25,4 +23,4 @@ class ApiController<T> {
 
   // END BLOC
 
-}
+} */
