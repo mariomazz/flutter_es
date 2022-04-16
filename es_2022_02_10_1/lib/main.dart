@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:url_strategy/url_strategy.dart';
 import 'core/routing/routing.dart';
 
 Future<void> main() async {
+  setPathUrlStrategy();
   runApp(const ChatBotApp());
 }
 
@@ -17,8 +18,8 @@ class ChatBotApp extends StatelessWidget {
         primarySwatch: Colors.green,
         fontFamily: 'Poppins',
       ),
-      routeInformationParser: Routing.delegate.routes.routeInformationParser,
-      routerDelegate: Routing.delegate.routes.routerDelegate,
+      routeInformationParser: Routing.parser,
+      routerDelegate: Routing.delegate,
     );
   }
 }

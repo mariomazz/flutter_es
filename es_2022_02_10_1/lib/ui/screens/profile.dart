@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../widget/padding.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -7,6 +8,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SizedBox.expand(
         child: Column(
           children: [
@@ -27,7 +29,7 @@ class ProfilePage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                
+                context.go("/home", extra: {"mario": "ciao mario"});
               },
               child: const Icon(Icons.arrow_circle_right),
             ),
