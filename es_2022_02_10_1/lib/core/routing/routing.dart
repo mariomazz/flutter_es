@@ -36,8 +36,10 @@ class Routing {
 
   final Map<String, Object?> _stackObj = {};
 
+  final String _initialLocation = "/";
+
   Map<String, Object?> obj(Pages page) => Map<String, Object?>.from(_stackObj)
-    ..removeWhere((k, v) => !(k == pathFromPage(page)));
+    ..removeWhere((k, v) => (k != pathFromPage(page)));
 
   List<GoRoute> buildRoutes() {
     return Pages.values.map((e) {
@@ -52,22 +54,18 @@ class Routing {
   }
 
   late final GoRouter _pages = GoRouter(
-    routes: [
-      GoRoute(
-        path: '/',
-        builder: (BuildContext context, GoRouterState state) {
-          pushObj(state.extra, '/');
-          return const HomePage();
-        },
-      ),
-      ...buildRoutes(),
-    ],
+    initialLocation: _initialLocation,
+    routes: buildRoutes(),
     errorBuilder: (context, state) {
-      pushObj(
-        state.extra,
-        pathFromPage(Pages.notFound),
-      );
+      pushObj(state.extra, pathFromPage(Pages.notFound));
       return const NotFound();
+    },
+    redirect: (state) {
+      if (state.location == _initialLocation) {
+        pushObj(state.extra, pathFromPage(Pages.home));
+        return pathFromPage(Pages.home);
+      }
+      return null;
     },
   );
 

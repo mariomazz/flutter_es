@@ -9,7 +9,7 @@ class NotFound extends StatelessWidget {
     return const Scaffold(
       body: Center(
         child: TitleCS(
-          data: "404 ERROR",
+          data: "404 NOT FOUND",
         ),
       ),
     );

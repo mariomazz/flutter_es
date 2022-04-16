@@ -29,7 +29,7 @@ class ProfilePage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                context.go("/home", extra: {"mario": "ciao mario"});
+                context.go("/", extra: {"mario": "ciao mario"});
               },
               child: const Icon(Icons.arrow_circle_right),
             ),
