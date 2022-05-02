@@ -15,7 +15,6 @@ class ChatBotApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Chat Bot Website',
       theme: ThemeData(
-        primarySwatch: Colors.green,
         fontFamily: 'Poppins',
       ),
       routeInformationParser: Routing.parser,

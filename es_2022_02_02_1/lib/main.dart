@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: MyProviders.providers,
       child: MaterialApp.router(
-        
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,

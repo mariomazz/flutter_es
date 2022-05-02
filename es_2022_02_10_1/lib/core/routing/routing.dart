@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../ui/screens/home_page.dart';
 import '../../ui/screens/not_found.dart';
-import '../../ui/screens/profile.dart';
 
-enum Pages { home, profile, notFound }
+enum Pages {
+  home,
+  notFound,
+}
 
 class Routing {
   static final Routing _instance = Routing(builder: fromPage);
@@ -21,12 +23,22 @@ class Routing {
     switch (page) {
       case Pages.home:
         return const HomePage();
-      case Pages.profile:
-        return const ProfilePage();
       case Pages.notFound:
         return const NotFound();
       default:
         return const NotFound();
+    }
+  }
+
+  Pages fromString(String value) {
+    if (pathFromPage(Pages.home).toLowerCase().contains(value.toLowerCase())) {
+      return Pages.home;
+    } else if (pathFromPage(Pages.notFound)
+        .toLowerCase()
+        .contains(value.toLowerCase())) {
+      return Pages.notFound;
+    } else {
+      return Pages.notFound;
     }
   }
 
@@ -41,24 +53,21 @@ class Routing {
   Map<String, Object?> obj(Pages page) => Map<String, Object?>.from(_stackObj)
     ..removeWhere((k, v) => (k != pathFromPage(page)));
 
-  List<GoRoute> buildRoutes() {
-    return Pages.values.map((e) {
-      return GoRoute(
-        path: pathFromPage(e),
-        builder: (BuildContext context, GoRouterState state) {
-          pushObj(state.extra, pathFromPage(e));
-          return builder(e);
-        },
-      );
-    }).toList();
-  }
+  List<GoRoute> buildRoutes() => Pages.values
+      .map((e) => GoRoute(
+          path: pathFromPage(e),
+          builder: (BuildContext context, GoRouterState state) {
+            pushObj(state.extra, pathFromPage(e));
+            return builder(e);
+          }))
+      .toList();
 
   late final GoRouter _pages = GoRouter(
     initialLocation: _initialLocation,
     routes: buildRoutes(),
     errorBuilder: (context, state) {
-      pushObj(state.extra, pathFromPage(Pages.notFound));
-      return const NotFound();
+      pushObj(state.extra, pathFromPage(fromString(state.location)));
+      return builder(fromString(state.location));
     },
     redirect: (state) {
       if (state.location == _initialLocation) {
@@ -71,13 +80,8 @@ class Routing {
 
   GoRouter get routes => _pages;
 
-  String pathFromPage(Pages page) {
-    return '/${page.name}';
-  }
+  String pathFromPage(Pages page) => '/${page.name}';
 
-  void pushObj(Object? obj, String path) {
-    if (obj != null) {
-      _stackObj.addAll({path: obj});
-    }
-  }
+  void pushObj(Object? obj, String path) =>
+      obj != null ? _stackObj.addAll({path: obj}) : () {};
 }

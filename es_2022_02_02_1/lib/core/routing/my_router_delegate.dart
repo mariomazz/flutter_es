@@ -4,6 +4,7 @@ import 'package:es_2022_02_02_1/ui/pages/main_screen.dart';
 import 'package:es_2022_02_02_1/ui/pages/page404.dart';
 import 'package:es_2022_02_02_1/ui/pages/profile.dart';
 import 'package:es_2022_02_02_1/ui/widgets/my_material_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'models/page_configuration.dart';
 
@@ -38,7 +39,9 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
 
   @override
   Future<bool> popRoute() async {
-    print('pop override');
+    if (kDebugMode) {
+      print('pop override');
+    }
     return true;
   }
 
@@ -55,7 +58,9 @@ class MyRouterDelegate extends RouterDelegate<PageConfiguration>
         key: navigatorKey,
         pages: buildPages(),
         onPopPage: (route, data) {
-          print('pop Navigator');
+          if (kDebugMode) {
+            print('pop Navigator');
+          }
           return route.didPop(data);
         },
       );
