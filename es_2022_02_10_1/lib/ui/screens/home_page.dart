@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
           },
           child: PaddingCS(
             child: SvgPicture.asset(
-              "icons/svg/angle-left-solid.svg",
+              "assets/icons/svg/angle-left-solid.svg",
               color: Colors.white,
             ),
           ),
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                           width: 30,
                           height: 30,
                           child: SvgPicture.asset(
-                            "icons/svg/paper-plane-solid.svg",
+                            "assets/icons/svg/paper-plane-solid.svg",
                             color: ColorsCS.primary,
                           ),
                         ),
